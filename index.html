@@ -1,120 +1,291 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aprende Verbos</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aprende Verbos — Mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: "Inter", sans-serif;
-    background: #f9fafc;
-    color: #0b1220;
-    margin: 0;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  :root{
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --text:#0b1220;
+    --muted:#667085;
+    --accent:#1a936f;
+    --accent-hover:#157d5e;
+    --border:#e3e8ef;
+    --focus:#2b7cff;
   }
-  h1 {
-    font-size: 20px;
-    margin: 8px 0 12px;
+  *{box-sizing:border-box}
+  body{
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    margin:0; background:var(--bg); color:var(--text);
+    padding:16px; display:flex; flex-direction:column; align-items:center;
   }
-  select, button {
-    width: 100%;
-    max-width: 320px;
-    font-size: 16px;
-    padding: 10px 14px;
-    margin: 6px 0;
-    border-radius: 12px;
-    border: 1px solid #e3e8ef;
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  header{
+    width:100%; max-width:680px; display:flex; align-items:center; justify-content:space-between;
+    gap:8px; margin-bottom:12px;
   }
-  button {
-    background: #1a936f;
-    color: #fff;
-    font-weight: 500;
+  .title{font-size:18px; font-weight:700; letter-spacing:0.2px}
+  .pill{
+    font-size:12px; color:#fff; background:var(--accent);
+    padding:6px 10px; border-radius:999px; font-weight:600;
   }
-  button:hover {
-    background: #157d5e;
+  .controls{
+    width:100%; max-width:680px; display:grid; grid-template-columns:1fr 1fr; gap:10px;
   }
-  .verbos {
-    width: 100%;
-    max-width: 340px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
+  select{
+    width:100%; appearance:none;
+    padding:12px 14px; border:1px solid var(--border); border-radius:14px;
+    background:var(--card); color:var(--text); font-size:15px; font-weight:500;
+    box-shadow:0 1px 3px rgba(16,24,40,.04);
+    outline:none;
   }
-  .resultado {
-    margin-top: 18px;
-    width: 100%;
-    max-width: 360px;
-    text-align: left;
-    background: #fff;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+  select:focus{border-color:var(--focus); box-shadow:0 0 0 3px rgba(43,124,255,.15)}
+  .card{
+    width:100%; max-width:680px; background:var(--card); border:1px solid var(--border);
+    border-radius:16px; margin-top:14px; box-shadow:0 8px 24px rgba(16,24,40,.06);
+    overflow:hidden;
   }
-  table { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 10px; }
-  td { padding: 4px 0; }
-  h2 { font-size: 18px; margin-bottom: 4px; }
-  h3 { font-size: 16px; margin-top: 10px; }
-  ul { padding-left: 20px; margin: 4px 0; }
+  .card-header{
+    padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px;
+    border-bottom:1px solid var(--border);
+  }
+  .verb-name{font-weight:700; font-size:18px}
+  .hint{font-size:12px; color:var(--muted)}
+  .grid{
+    width:100%; display:grid; grid-template-columns:110px 1fr 1.2fr;
+  }
+  .row{
+    display:contents;
+  }
+  .cell{
+    padding:12px 16px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center;
+  }
+  .cell:nth-child(3n-1){ /* форма глагола */
+    font-size:22px; font-weight:700; line-height:1.1; letter-spacing:.2px;
+  }
+  .cell:nth-child(3n){ color:var(--muted); font-size:14px}
+  .head{
+    background:#fafbff; font-size:12px; color:var(--muted); font-weight:600;
+    letter-spacing:.4px; text-transform:uppercase;
+  }
+  .badgelike{
+    font-size:11px; padding:4px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted);
+  }
+  .footer{
+    padding:10px 16px; display:flex; gap:8px; align-items:center; justify-content:space-between;
+  }
+  .cta{
+    background:var(--accent); color:#fff; border:none; border-radius:12px; padding:10px 14px;
+    font-weight:600; font-size:14px;
+  }
+  .cta:active,.cta:hover{background:var(--accent-hover)}
+  @media (max-width:480px){
+    .controls{grid-template-columns:1fr}
+    .grid{grid-template-columns:92px 1fr 1.2fr}
+    .cell:nth-child(3n-1){font-size:20px}
+  }
 </style>
 </head>
 <body>
-  <h1>🇪🇸 Aprende Verbos</h1>
+  <header>
+    <div class="title">🇪🇸 Aprende Verbos</div>
+    <div class="pill">Mobile UX</div>
+  </header>
 
-  <select id="tipo">
-    <option value="">Selecciona tipo</option>
-    <option value="regular">Regulares</option>
-    <option value="irregular">Irregulares</option>
-  </select>
+  <div class="controls">
+    <select id="typeSelect" aria-label="Tipo de verbo">
+      <option value="">Tipo de verbos (elige)</option>
+      <option value="regular">Regulares (30)</option>
+      <option value="irregular">Irregulares (30)</option>
+    </select>
+    <select id="verbSelect" disabled aria-label="Selecciona el verbo">
+      <option value="">Selecciona un verbo</option>
+    </select>
+  </div>
 
-  <div class="verbos" id="verbos"></div>
-  <div class="resultado" id="resultado"></div>
+  <section id="panel" class="card" hidden>
+    <div class="card-header">
+      <div>
+        <div class="verb-name" id="verbTitle">—</div>
+        <div class="hint" id="verbMeta">Presente de indicativo • 6 formas</div>
+      </div>
+      <div class="badgelike" id="badge">—</div>
+    </div>
+
+    <div class="grid" role="table" aria-label="Conjugación">
+      <div class="row head">
+        <div class="cell">Pronombre</div>
+        <div class="cell">Forma</div>
+        <div class="cell">Ejemplo</div>
+      </div>
+      <div id="rows"></div>
+      <div class="footer">
+        <span class="hint">Texto формы — крупнее для удобства изучения</span>
+        <button class="cta" id="shuffleBtn" type="button">Otro verbo</button>
+      </div>
+    </div>
+  </section>
 
 <script>
-const data = {
-  regular: {
-    hablar:{yo:"hablo",tú:"hablas",él:"habla",nosotros:"hablamos",vosotros:"habláis",ellos:"hablan",frases:["Yo hablo español.","Tú hablas con tu amigo.","Nosotros hablamos mucho."]},
-    comer:{yo:"como",tú:"comes",él:"come",nosotros:"comemos",vosotros:"coméis",ellos:"comen",frases:["Yo como pan.","Ellos comen en casa.","Nosotros comemos juntos."]},
-    vivir:{yo:"vivo",tú:"vives",él:"vive",nosotros:"vivimos",vosotros:"vivís",ellos:"viven",frases:["Yo vivo en Madrid.","Ella vive sola.","Nosotros vivimos cerca."]}
-  },
-  irregular: {
-    ser:{yo:"soy",tú:"eres",él:"es",nosotros:"somos",vosotros:"sois",ellos:"son",frases:["Yo soy feliz.","Tú eres amable.","Ellos son estudiantes."]},
-    ir:{yo:"voy",tú:"vas",él:"va",nosotros:"vamos",vosotros:"vais",ellos:"van",frases:["Yo voy al cine.","Tú vas a casa.","Nosotros vamos juntos."]},
-    tener:{yo:"tengo",tú:"tienes",él:"tiene",nosotros:"tenemos",vosotros:"tenéis",ellos:"tienen",frases:["Yo tengo un libro.","Ella tiene hambre.","Nosotros tenemos tiempo."]}
-  }
+/** ========= DATA ========= **/
+
+// 30 REGULARES (presente simple: -ar, -er, -ir)
+const REGULAR_LIST = [
+  // -AR (12)
+  "hablar","trabajar","estudiar","mirar","bailar","comprar","escuchar","viajar","llamar","ayudar","cocinar","caminar",
+  // -ER (9)
+  "comer","beber","aprender","vender","creer","correr","responder","comprender","deber",
+  // -IR (9)
+  "vivir","abrir","escribir","decidir","recibir","permitir","describir","asistir","compartir"
+];
+
+// 30 IRREGULARES (presente)
+const IRREGULAR_MAP = {
+  ser:      ["soy","eres","es","somos","sois","son"],
+  estar:    ["estoy","estás","está","estamos","estáis","están"],
+  ir:       ["voy","vas","va","vamos","vais","van"],
+  tener:    ["tengo","tienes","tiene","tenemos","tenéis","tienen"],
+  hacer:    ["hago","haces","hace","hacemos","hacéis","hacen"],
+  decir:    ["digo","dices","dice","decimos","decís","dicen"],
+  poder:    ["puedo","puedes","puede","podemos","podéis","pueden"],
+  querer:   ["quiero","quieres","quiere","queremos","queréis","quieren"],
+  venir:    ["vengo","vienes","viene","venimos","venís","vienen"],
+  poner:    ["pongo","pones","pone","ponemos","ponéis","ponen"],
+  salir:    ["salgo","sales","sale","salimos","salís","salen"],
+  ver:      ["veo","ves","ve","vemos","veis","ven"],
+  dar:      ["doy","das","da","damos","dais","dan"],
+  saber:    ["sé","sabes","sabe","sabemos","sabéis","saben"],
+  traer:    ["traigo","traes","trae","traemos","traéis","traen"],
+  oír:      ["oigo","oyes","oye","oímos","oís","oyen"],
+  jugar:    ["juego","juegas","juega","jugamos","jugáis","juegan"],
+  pensar:   ["pienso","piensas","piensa","pensamos","pensáis","piensan"],
+  dormir:   ["duermo","duermes","duerme","dormimos","dormís","duermen"],
+  pedir:    ["pido","pides","pide","pedimos","pedís","piden"],
+  preferir: ["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"],
+  volver:   ["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"],
+  encontrar:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"],
+  construir:["construyo","construyes","construye","construimos","construís","construyen"],
+  conducir: ["conduzco","conduces","conduce","conducimos","conducís","conducen"],
+  caber:    ["quepo","cabes","cabe","cabemos","cabéis","caben"],
+  valer:    ["valgo","vales","vale","valemos","valéis","valen"],
+  caer:     ["caigo","caes","cae","caemos","caéis","caen"],
+  elegir:   ["elijo","eliges","elige","elegimos","elegís","eligen"],
+  huir:     ["huyo","huyes","huye","huimos","huís","huyen"]
 };
+const IRREGULAR_LIST = Object.keys(IRREGULAR_MAP).sort();
 
-const tipoSelect=document.getElementById("tipo");
-const verbosDiv=document.getElementById("verbos");
-const resultadoDiv=document.getElementById("resultado");
+// Шаблон предложений (подставляем форму)
+const PRONOUNS = ["yo","tú","él/ella/usted","nosotros","vosotros","ellos/ustedes"];
+const SENTENCE_TPL = [
+  "Yo {{f}} hoy.",
+  "Tú {{f}} ahora.",
+  "Él/Ella {{f}} mucho.",
+  "Nosotros {{f}} juntos.",
+  "Vosotros {{f}} en casa.",
+  "Ellos {{f}} también."
+];
 
-tipoSelect.addEventListener("change",()=>{
-  const tipo=tipoSelect.value;
-  resultadoDiv.innerHTML="";
-  verbosDiv.innerHTML="";
-  if(!tipo) return;
-  const verbos=Object.keys(data[tipo]);
-  verbosDiv.innerHTML=verbos.map(v=>`<button onclick="mostrar('${tipo}','${v}')">${v}</button>`).join('');
+/** ========= HELPERS ========= **/
+
+function getType(verb){
+  if (IRREGULAR_MAP[verb]) return "irregular";
+  if (verb.endsWith("ar")) return "ar";
+  if (verb.endsWith("er")) return "er";
+  if (verb.endsWith("ir")) return "ir";
+  return "regular";
+}
+
+function conjRegular(verb){
+  const stem = verb.slice(0,-2);
+  const ending = verb.slice(-2);
+  let forms = [];
+  if (ending === "ar")      forms = [stem+"o", stem+"as", stem+"a", stem+"amos", stem+"áis", stem+"an"];
+  else if (ending === "er") forms = [stem+"o", stem+"es", stem+"e", stem+"emos", stem+"éis", stem+"en"];
+  else if (ending === "ir") forms = [stem+"o", stem+"es", stem+"e", stem+"imos", stem+"ís", stem+"en"];
+  return forms;
+}
+
+function makeRows(forms){
+  const rowsFrag = document.createDocumentFragment();
+  for (let i=0; i<6; i++){
+    const r = document.createElement("div"); r.className = "row";
+    const c1 = document.createElement("div"); c1.className="cell"; c1.textContent = PRONOUNS[i];
+    const c2 = document.createElement("div"); c2.className="cell"; c2.textContent = forms[i];
+    const c3 = document.createElement("div"); c3.className="cell"; c3.textContent = SENTENCE_TPL[i].replace("{{f}}", forms[i]);
+    r.append(c1,c2,c3);
+    rowsFrag.appendChild(r);
+  }
+  return rowsFrag;
+}
+
+function fillVerbOptions(list){
+  verbSelect.innerHTML = `<option value="">Selecciona un verbo</option>` +
+    list.map(v=>`<option value="${v}">${v}</option>`).join("");
+  verbSelect.disabled = false;
+}
+
+/** ========= UI LOGIC ========= **/
+
+const typeSelect = document.getElementById("typeSelect");
+const verbSelect = document.getElementById("verbSelect");
+const panel      = document.getElementById("panel");
+const rowsHolder = document.getElementById("rows");
+const verbTitle  = document.getElementById("verbTitle");
+const verbMeta   = document.getElementById("verbMeta");
+const badge      = document.getElementById("badge");
+const shuffleBtn = document.getElementById("shuffleBtn");
+
+typeSelect.addEventListener("change", ()=>{
+  rowsHolder.innerHTML = "";
+  panel.hidden = true;
+  const t = typeSelect.value;
+  if (!t){ verbSelect.disabled = true; verbSelect.value=""; return; }
+  if (t === "regular"){
+    const list = [...REGULAR_LIST].sort((a,b)=>a.localeCompare(b));
+    fillVerbOptions(list);
+  } else {
+    fillVerbOptions(IRREGULAR_LIST);
+  }
+  verbSelect.focus();
 });
 
-function mostrar(tipo,verbo){
-  const v=data[tipo][verbo];
-  let html=`<h2>${verbo}</h2><table>`+
-    `<tr><td>yo</td><td>${v.yo}</td></tr>`+
-    `<tr><td>tú</td><td>${v.tú}</td></tr>`+
-    `<tr><td>él/ella</td><td>${v.él}</td></tr>`+
-    `<tr><td>nosotros</td><td>${v.nosotros}</td></tr>`+
-    `<tr><td>vosotros</td><td>${v.vosotros}</td></tr>`+
-    `<tr><td>ellos</td><td>${v.ellos}</td></tr>`+
-    `</table><h3>Ejemplos:</h3><ul>`+
-    v.frases.map(f=>`<li>${f}</li>`).join('')+`</ul>`;
-  resultadoDiv.innerHTML=html;
-}
+verbSelect.addEventListener("change", ()=>{
+  const v = verbSelect.value;
+  if (!v) { panel.hidden = true; return; }
+
+  let forms = [];
+  let tag = "";
+  if (typeSelect.value === "regular"){
+    forms = conjRegular(v);
+    tag = v.endsWith("ar") ? "-ar" : v.endsWith("er") ? "-er" : "-ir";
+  } else {
+    forms = IRREGULAR_MAP[v];
+    tag = "irregular";
+  }
+
+  rowsHolder.innerHTML = "";
+  rowsHolder.appendChild(makeRows(forms));
+
+  verbTitle.textContent = v;
+  verbMeta.textContent  = "Presente de indicativo • 6 formas";
+  badge.textContent     = typeSelect.value === "regular" ? `Regular ${tag}` : "Irregular";
+
+  panel.hidden = false;
+  // скроллим к карточке на мобильном
+  panel.scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+shuffleBtn.addEventListener("click", ()=>{
+  const list = typeSelect.value === "regular"
+    ? [...REGULAR_LIST].sort()
+    : IRREGULAR_LIST;
+  const idx = Math.floor(Math.random()*list.length);
+  verbSelect.value = list[idx];
+  verbSelect.dispatchEvent(new Event("change"));
+});
 </script>
 </body>
 </html>

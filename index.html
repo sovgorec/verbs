@@ -1,96 +1,143 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aprende Verbos</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aprende Verbos — Mobile</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;
-  --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;--focus:#2b7cff;
+  --bg:#f6f8fb; --card:#fff; --text:#0b1220; --muted:#667085;
+  --accent:#1a936f; --accent-hover:#157d5e; --border:#e3e8ef; --focus:#2b7cff;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
-*{box-sizing:border-box;}
+*{box-sizing:border-box}
+html,body{height:100%}
 body{
-  margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
-  display:flex;flex-direction:column;align-items:center;padding:16px;
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  display:flex; flex-direction:column; align-items:center;
+  padding:16px;
+  /* чтобы фиксированная кнопка не перекрывала контент */
+  padding-bottom:calc(16px + 68px + var(--safe-bottom));
 }
-header{width:100%;max-width:680px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-.title{font-weight:700;font-size:18px;}
-.pill{background:var(--accent);color:#fff;font-size:12px;font-weight:600;border-radius:999px;padding:5px 10px;}
-.controls{width:100%;max-width:680px;display:grid;gap:10px;}
+.wrap{width:100%; max-width:680px}
+header{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+h1{font-size:18px; margin:0; font-weight:700}
+.tabs{display:flex; gap:8px; margin-bottom:10px}
+.tab{
+  flex:1; text-align:center; padding:10px 12px; border-radius:12px; border:1px solid var(--border);
+  background:#fff; font-weight:600; font-size:14px; color:var(--text);
+}
+.tab.active{background:var(--accent); color:#fff; border-color:var(--accent)}
 select{
-  width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);
-  background:#fff;font-size:15px;font-weight:500;color:var(--text);
-  box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  width:100%; padding:12px 14px; font-size:15px; font-weight:500;
+  border:1px solid var(--border); border-radius:12px; background:#fff;
+  box-shadow:0 1px 3px rgba(16,24,40,.05); outline:none;
 }
+select:focus{border-color:var(--focus); box-shadow:0 0 0 3px rgba(43,124,255,.15)}
 .card{
-  width:100%;max-width:680px;background:var(--card);border:1px solid var(--border);
-  border-radius:16px;margin-top:16px;box-shadow:0 4px 14px rgba(0,0,0,0.05);
-  overflow:hidden;animation:fadeIn .3s ease;
+  margin-top:12px; background:#fff; border:1px solid var(--border); border-radius:16px;
+  box-shadow:0 6px 18px rgba(16,24,40,.06); overflow:hidden;
 }
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.card-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.verb-name{font-weight:700;font-size:20px;}
-.badge{font-size:12px;border:1px solid var(--border);padding:3px 8px;border-radius:999px;color:var(--muted);}
-.grid{display:grid;grid-template-columns:90px 1fr 1.2fr;}
-.head{background:#fafbff;color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;}
-.cell{padding:10px 12px;border-bottom:1px solid var(--border);font-size:15px;}
-.cell.forma{font-size:22px;font-weight:700;line-height:1.2;}
-.cell.ejemplo{color:var(--muted);font-size:14px;}
-.footer{
-  padding:12px 16px;display:flex;justify-content:center;
-  background:#fafbff;border-top:1px solid var(--border);
+.card-hd{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:8px;
+  padding:14px 16px; border-bottom:1px solid var(--border);
 }
-.cta{
-  background:var(--accent);color:#fff;font-weight:600;border:none;
-  border-radius:12px;padding:10px 16px;font-size:15px;
+.verb-title{font-size:20px; font-weight:800; letter-spacing:.2px}
+.subtitle{margin-top:2px; font-size:13px; color:var(--muted)}
+.badge{font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:4px 10px; white-space:nowrap}
+.grid-head, .row{display:grid; grid-template-columns:92px 1fr 1.2fr}
+.grid-head{background:#fafbff; border-bottom:1px solid var(--border)}
+.hcell{
+  padding:10px 12px; font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.3px; text-transform:uppercase;
 }
-.cta:active,.cta:hover{background:var(--accent-hover);}
-@media(max-width:480px){
-  .grid{grid-template-columns:70px 1fr 1.2fr;}
-  .cell.forma{font-size:20px;}
-  .title{font-size:17px;}
+.cell{
+  padding:12px 12px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center;
+  min-height:48px; /* одинаковая высота строк */
+}
+.cell.forma{
+  font-size:20px; font-weight:800; line-height:1.25;
+}
+.cell.ejemplo{color:var(--muted); font-size:14px; line-height:1.35}
+.fixed-cta{
+  position:fixed; left:12px; right:12px; bottom:calc(12px + var(--safe-bottom));
+  display:flex; justify-content:center;
+}
+.fixed-cta button{
+  width:100%; max-width:680px; height:56px;
+  background:var(--accent); color:#fff; border:none; border-radius:14px;
+  font-weight:700; font-size:16px; letter-spacing:.2px;
+  box-shadow:0 8px 24px rgba(26,147,111,.35);
+}
+.fixed-cta button:active,.fixed-cta button:hover{background:var(--accent-hover)}
+@media (max-width:480px){
+  .row, .grid-head{grid-template-columns:80px 1fr 1.2fr}
+  .cell.forma{font-size:19px}
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="title">🇪🇸 Aprende Verbos</div>
-  <div class="pill">Mobile</div>
-</header>
+<div class="wrap">
+  <header><h1>🇪🇸 Aprende Verbos</h1></header>
 
-<div class="controls">
-  <select id="typeSelect">
-    <option value="">Tipo de verbos</option>
-    <option value="regular">Regulares (30)</option>
-    <option value="irregular">Irregulares (30)</option>
-  </select>
-  <select id="verbSelect" disabled>
+  <!-- Вкладки -->
+  <div class="tabs" role="tablist" aria-label="Tipo de verbos">
+    <button id="tab-regular" class="tab active" role="tab" aria-selected="true">Regulares</button>
+    <button id="tab-irregular" class="tab" role="tab" aria-selected="false">Irregulares</button>
+  </div>
+
+  <!-- Селект глаголов -->
+  <select id="verbSelect" aria-label="Selecciona un verbo">
     <option value="">Selecciona un verbo</option>
   </select>
+
+  <!-- Карточка результата -->
+  <section id="panel" class="card" hidden>
+    <div class="card-hd">
+      <div>
+        <div class="verb-title" id="verbTitle">—</div>
+        <div class="subtitle" id="verbRu">—</div>
+      </div>
+      <div class="badge" id="badge">—</div>
+    </div>
+
+    <div class="grid-head">
+      <div class="hcell">Pronombre</div>
+      <div class="hcell">Forma</div>
+      <div class="hcell">Ejemplo</div>
+    </div>
+    <div id="rows"></div>
+  </section>
 </div>
 
-<section id="panel" class="card" hidden>
-  <div class="card-header">
-    <div class="verb-name" id="verbTitle">—</div>
-    <div class="badge" id="badge">—</div>
-  </div>
-
-  <div class="grid head">
-    <div class="cell">Pronombre</div>
-    <div class="cell">Forma</div>
-    <div class="cell">Ejemplo</div>
-  </div>
-  <div id="rows"></div>
-  <div class="footer"><button class="cta" id="nextVerb">Otro verbo</button></div>
-</section>
+<!-- Фиксированная кнопка снизу -->
+<div class="fixed-cta">
+  <button id="nextVerb" type="button" aria-label="Elegir otro verbo">Otro verbo</button>
+</div>
 
 <script>
-const PRONOUNS=["yo","tú","él/ella","nosotros","vosotros","ellos"];
-const SENTENCES=["Yo {{f}} hoy.","Tú {{f}} ahora.","Él/Ella {{f}} mucho.","Nosotros {{f}} juntos.","Vosotros {{f}} en casa.","Ellos {{f}} también."];
-const REGULAR_LIST=["hablar","trabajar","estudiar","mirar","bailar","comprar","escuchar","viajar","llamar","ayudar","cocinar","caminar","comer","beber","aprender","vender","creer","correr","responder","comprender","deber","vivir","abrir","escribir","decidir","recibir","permitir","describir","asistir","compartir"];
-const IRREGULAR_MAP={
+/* ======= ДАННЫЕ ======= */
+const PRONOUNS = ["yo","tú","él/ella","nosotros","vosotros","ellos"];
+const TPL = [
+  "Yo {{f}} hoy.",
+  "Tú {{f}} ahora.",
+  "Él/Ella {{f}} mucho.",
+  "Nosotros {{f}} juntos.",
+  "Vosotros {{f}} en casa.",
+  "Ellos {{f}} también."
+];
+
+/* 30 регулярных */
+const REGULAR = [
+  "hablar","trabajar","estudiar","mirar","bailar","comprar","escuchar","viajar","llamar","ayudar","cocinar","caminar",
+  "comer","beber","aprender","vender","creer","correr","responder","comprender","deber",
+  "vivir","abrir","escribir","decidir","recibir","permitir","describir","asistir","compartir"
+];
+
+/* 30 нерегулярных с формами */
+const IRREGULAR = {
   ser:["soy","eres","es","somos","sois","son"],
   estar:["estoy","estás","está","estamos","estáis","están"],
   ir:["voy","vas","va","vamos","vais","van"],
@@ -123,58 +170,104 @@ const IRREGULAR_MAP={
   huir:["huyo","huyes","huye","huimos","huís","huyen"]
 };
 
-const typeSelect=document.getElementById("typeSelect");
-const verbSelect=document.getElementById("verbSelect");
-const panel=document.getElementById("panel");
-const verbTitle=document.getElementById("verbTitle");
-const badge=document.getElementById("badge");
-const rowsDiv=document.getElementById("rows");
-const nextVerb=document.getElementById("nextVerb");
+/* Переводы на русский */
+const RU = {
+  // REGULARES
+  hablar:"говорить", trabajar:"работать", estudiar:"учиться/изучать", mirar:"смотреть",
+  bailar:"танцевать", comprar:"покупать", escuchar:"слушать", viajar:"путешествовать",
+  llamar:"звонить/называть", ayudar:"помогать", cocinar:"готовить", caminar:"ходить/гулять",
+  comer:"есть/кушать", beber:"пить", aprender:"учиться/усваивать", vender:"продавать",
+  creer:"верить/считать", correr:"бегать", responder:"отвечать", comprender:"понимать",
+  deber:"быть должным/должен", vivir:"жить", abrir:"открывать", escribir:"писать",
+  decidir:"решать", recibir:"получать", permitir:"разрешать", describir:"описывать",
+  asistir:"посещать/присутствовать", compartir:"делиться",
+  // IRREGULARES
+  ser:"быть (пост.)", estar:"находиться/быть (врем.)", ir:"идти/ехать",
+  tener:"иметь", hacer:"делать", decir:"говорить/сказать", poder:"мочь",
+  querer:"хотеть/любить", venir:"приходить/приезжать", poner:"класть/ставить",
+  salir:"выходить/уезжать", ver:"видеть", dar:"давать", saber:"знать (факты)",
+  traer:"приносить/привозить", oír:"слышать", jugar:"играть", pensar:"думать",
+  dormir:"спать", pedir:"просить/заказывать", preferir:"предпочитать",
+  volver:"возвращаться", encontrar:"находить/встречать",
+  construir:"строить", conducir:"вести (машину)", caber:"помещаться/вмещать",
+  valer:"стоить/иметь ценность", caer:"падать", elegir:"выбирать", huir:"убегать"
+};
+
+/* ======= ЭЛЕМЕНТЫ ======= */
+const tabReg = document.getElementById('tab-regular');
+const tabIrr = document.getElementById('tab-irregular');
+const verbSelect = document.getElementById('verbSelect');
+const panel = document.getElementById('panel');
+const verbTitle = document.getElementById('verbTitle');
+const verbRu = document.getElementById('verbRu');
+const badge = document.getElementById('badge');
+const rows = document.getElementById('rows');
+const nextBtn = document.getElementById('nextVerb');
+
+let currentType = 'regular';
+
+/* ======= ЛОГИКА ======= */
+function fillSelect(type){
+  const list = type === 'regular' ? [...REGULAR] : Object.keys(IRREGULAR);
+  list.sort((a,b)=>a.localeCompare(b,'es'));
+  verbSelect.innerHTML = '<option value="">Selecciona un verbo</option>' + 
+    list.map(v=>`<option value="${v}">${v}</option>`).join('');
+}
 
 function conjRegular(v){
   const r=v.slice(0,-2), e=v.slice(-2);
-  if(e==="ar")return[`${r}o`,`${r}as`,`${r}a`,`${r}amos`,`${r}áis`,`${r}an`];
-  if(e==="er")return[`${r}o`,`${r}es`,`${r}e`,`${r}emos`,`${r}éis`,`${r}en`];
-  return[`${r}o`,`${r}es`,`${r}e`,`${r}imos`,`${r}ís`,`${r}en`];
+  if(e==='ar') return [r+'o',r+'as',r+'a',r+'amos',r+'áis',r+'an'];
+  if(e==='er') return [r+'o',r+'es',r+'e',r+'emos',r+'éis',r+'en'];
+  return [r+'o',r+'es',r+'e',r+'imos',r+'ís',r+'en'];
 }
 
-function renderRows(forms){
-  rowsDiv.innerHTML="";
-  forms.forEach((f,i)=>{
-    const r=document.createElement("div");r.className="grid";
-    r.innerHTML=`<div class="cell">${PRONOUNS[i]}</div>
-                 <div class="cell forma">${f}</div>
-                 <div class="cell ejemplo">${SENTENCES[i].replace("{{f}}",f)}</div>`;
-    rowsDiv.appendChild(r);
-  });
+function renderVerb(v){
+  if(!v){ panel.hidden = true; return; }
+  const irregular = currentType==='irregular';
+  const forms = irregular ? IRREGULAR[v] : conjRegular(v);
+  verbTitle.textContent = v;
+  verbRu.textContent = RU[v] ? `— ${RU[v]}` : '';
+  badge.textContent = irregular ? 'Irregular' : 'Regular';
+
+  rows.innerHTML = '';
+  for(let i=0;i<6;i++){
+    const row = document.createElement('div');
+    row.className = 'row';
+    const c1 = `<div class="cell">${PRONOUNS[i]}</div>`;
+    const c2 = `<div class="cell forma">${forms[i]}</div>`;
+    const c3 = `<div class="cell ejemplo">${TPL[i].replace('{{f}}', forms[i])}</div>`;
+    row.innerHTML = c1+c2+c3;
+    rows.appendChild(row);
+  }
+  panel.hidden = false;
+  panel.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-typeSelect.onchange=()=>{
-  verbSelect.innerHTML='<option value="">Selecciona un verbo</option>';
-  if(!typeSelect.value){verbSelect.disabled=true;return;}
-  const list=typeSelect.value==="regular"?REGULAR_LIST:Object.keys(IRREGULAR_MAP);
-  list.sort().forEach(v=>{
-    const opt=document.createElement("option");opt.value=v;opt.textContent=v;verbSelect.appendChild(opt);
-  });
-  verbSelect.disabled=false;
-};
+/* вкладки */
+function setTab(type){
+  currentType = type;
+  tabReg.classList.toggle('active', type==='regular');
+  tabIrr.classList.toggle('active', type==='irregular');
+  fillSelect(type);
+  panel.hidden = true;
+  verbSelect.focus();
+}
 
-verbSelect.onchange=()=>{
-  const v=verbSelect.value;if(!v)return;
-  const irregular=typeSelect.value==="irregular";
-  const forms=irregular?IRREGULAR_MAP[v]:conjRegular(v);
-  verbTitle.textContent=v;
-  badge.textContent=irregular?"Irregular":"Regular";
-  renderRows(forms);
-  panel.hidden=false;
-  panel.scrollIntoView({behavior:"smooth",block:"start"});
-};
+/* события */
+tabReg.addEventListener('click', ()=>setTab('regular'));
+tabIrr.addEventListener('click', ()=>setTab('irregular'));
 
-nextVerb.onclick=()=>{
-  const list=typeSelect.value==="regular"?REGULAR_LIST:Object.keys(IRREGULAR_MAP);
-  const random=list[Math.floor(Math.random()*list.length)];
-  verbSelect.value=random;verbSelect.dispatchEvent(new Event("change"));
-};
+verbSelect.addEventListener('change', ()=>renderVerb(verbSelect.value));
+
+nextBtn.addEventListener('click', ()=>{
+  const list = currentType==='regular' ? REGULAR : Object.keys(IRREGULAR);
+  const v = list[Math.floor(Math.random()*list.length)];
+  verbSelect.value = v;
+  renderVerb(v);
+});
+
+/* init */
+setTab('regular');
 </script>
 </body>
 </html>

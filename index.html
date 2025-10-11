@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Verbos irregulares</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;
-  --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;--focus:#2b7cff;
+  --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;
 }
 *{box-sizing:border-box;}
 body{
   margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
-  display:flex;flex-direction:column;align-items:center;padding:16px;padding-bottom:90px;
+  display:flex;flex-direction:column;align-items:center;padding:16px;
+  padding-bottom:90px;
 }
 .wrap{width:100%;max-width:700px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
+}
 h1{font-size:18px;font-weight:800;margin:0}
-.badge{font-size:12px;color:#fff;background:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700}
+.count{font-size:14px;color:var(--muted);font-weight:500}
 select{
   width:100%;padding:12px 14px;font-size:15px;font-weight:500;
   border:1px solid var(--border);border-radius:12px;background:#fff;
   box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:10px;
 }
-.tabs{display:flex;gap:8px;margin-bottom:10px;}
+.tabs{display:flex;gap:8px;margin-bottom:14px;}
 .tab{
-  flex:1;text-align:center;padding:10px 12px;border-radius:12px;border:1px solid var(--border);
-  background:#fff;font-weight:700;font-size:14px;color:var(--text);
+  flex:1;text-align:center;padding:10px 12px;border-radius:12px;
+  border:1px solid var(--border);background:#fff;font-weight:700;
+  font-size:14px;color:var(--text);
 }
 .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .card{
   background:#fff;border:1px solid var(--border);border-radius:16px;
-  box-shadow:0 8px 24px rgba(16,24,40,.06);overflow:hidden;
+  box-shadow:0 4px 12px rgba(16,24,40,.05);overflow:hidden;margin-bottom:14px;
 }
 .card-hd{padding:14px 16px;border-bottom:1px solid var(--border);}
-.verb-line{font-size:20px;font-weight:800;}
-.verb-line span{font-weight:500;color:var(--muted);font-size:15px;margin-left:6px;}
-.rows{display:grid;grid-template-columns:90px 1fr 1.2fr;}
-.cell{padding:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;min-height:50px;}
-.forma{font-size:20px;font-weight:700;}
-.ejemplo{color:var(--muted);font-size:14px;}
-button#nextVerb{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-  width:calc(100% - 32px);max-width:680px;height:56px;
-  background:var(--accent);color:#fff;font-weight:700;font-size:17px;
-  border:none;border-radius:14px;box-shadow:0 4px 12px rgba(26,147,111,0.3);
+.verb-line{font-size:20px;font-weight:700;}
+.verb-line span{font-weight:500;color:var(--muted);font-size:15px;margin-left:8px;}
+.table{display:grid;grid-template-columns:1fr 1fr;}
+.cell{
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;font-size:16px;
 }
-button#nextVerb:active{background:var(--accent-hover);}
+.cell.forma{justify-content:flex-end;font-size:20px;font-weight:700;}
+.examples{background:#fff;border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 4px 12px rgba(16,24,40,.05);padding:14px 16px;margin-bottom:14px;}
+.ex-item{margin-bottom:10px;}
+.ex-item:last-child{margin-bottom:0;}
+.es{font-size:15px;font-weight:600;}
+.ru{font-size:14px;color:var(--muted);}
+.footer{
+  position:fixed;bottom:0;left:0;width:100%;
+  background:#fff;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;padding:10px 16px;
+  box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+}
+button.nav{
+  flex:1;margin:0 4px;padding:14px 0;font-size:16px;font-weight:700;
+  border:none;border-radius:12px;color:#fff;background:var(--accent);
+}
+button.nav:active{background:var(--accent-hover);}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>🇪🇸 Verbos irregulares</h1>
-    <div class="badge">30 глаголов</div>
+    <div class="count">30 глаголов</div>
   </header>
 
   <select id="verbSelect">
@@ -71,18 +87,44 @@ button#nextVerb:active{background:var(--accent-hover);}
     <div class="card-hd">
       <div class="verb-line" id="verbLine">—</div>
     </div>
-    <div id="rows" class="rows"></div>
+    <div id="table" class="table"></div>
   </section>
+
+  <section id="examples" class="examples" hidden></section>
 </div>
 
-<button id="nextVerb">Siguiente verbo</button>
+<div class="footer">
+  <button id="prevVerb" class="nav">◀️ Назад</button>
+  <button id="nextVerb" class="nav">Далее ▶️</button>
+</div>
 
 <script>
 const PRON=["yo","tú","él/ella","nosotros","vosotros","ellos"];
 const EX={
- pres:["Yo {{f}} cada día.","Tú {{f}} sin dudar.","Él/Ella {{f}} cuando puede.","Nosotros {{f}} juntos.","Vosotros {{f}} en casa.","Ellos {{f}} con gusto."],
- past:["Ayer yo {{f}} temprano.","Anoche tú {{f}} sin pausa.","Él/Ella {{f}} al final.","Nosotros {{f}} con amigos.","Vosotros {{f}} en el viaje.","Ellos {{f}} sin problemas."],
- fut:["Mañana yo {{f}} sin falta.","Luego tú {{f}} si quieres.","Él/Ella {{f}} con calma.","Nosotros {{f}} otra vez.","Vosotros {{f}} después de clase.","Ellos {{f}} cuando toque."]
+ pres:[
+  ["Yo {{f}} cada día.","Я {{f}} каждый день."],
+  ["Tú {{f}} sin dudar.","Ты {{f}} без сомнений."],
+  ["Él/Ella {{f}} cuando puede.","Он/Она {{f}}, когда может."],
+  ["Nosotros {{f}} juntos.","Мы {{f}} вместе."],
+  ["Vosotros {{f}} en casa.","Вы {{f}} дома."],
+  ["Ellos {{f}} con gusto.","Они {{f}} с удовольствием."]
+ ],
+ past:[
+  ["Ayer yo {{f}} temprano.","Вчера я {{f}} рано."],
+  ["Anoche tú {{f}} sin pausa.","Прошлой ночью ты {{f}} без остановки."],
+  ["Él/Ella {{f}} al final.","Он/Она {{f}} в конце."],
+  ["Nosotros {{f}} con amigos.","Мы {{f}} с друзьями."],
+  ["Vosotros {{f}} en el viaje.","Вы {{f}} во время поездки."],
+  ["Ellos {{f}} sin problemas.","Они {{f}} без проблем."]
+ ],
+ fut:[
+  ["Mañana yo {{f}} sin falta.","Завтра я {{f}} обязательно."],
+  ["Luego tú {{f}} si quieres.","Потом ты {{f}}, если захочешь."],
+  ["Él/Ella {{f}} con calma.","Он/Она {{f}} спокойно."],
+  ["Nosotros {{f}} otra vez.","Мы {{f}} снова."],
+  ["Vosotros {{f}} después de clase.","Вы {{f}} после занятий."],
+  ["Ellos {{f}} cuando toque.","Они {{f}} когда придёт время."]
+ ]
 };
 const VERBS={
  ser:{ru:"быть (пост.)",pres:["soy","eres","es","somos","sois","son"]},
@@ -106,7 +148,7 @@ const VERBS={
  pedir:{ru:"просить",pres:["pido","pides","pide","pedimos","pedís","piden"]},
  preferir:{ru:"предпочитать",pres:["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"]},
  volver:{ru:"возвращаться",pres:["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"]},
- encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"]},
+ encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentра","encontramos","encontráis","encuentran"]},
  construir:{ru:"строить",pres:["construyo","construyes","construye","construimos","construís","construyen"]},
  conducir:{ru:"вести",pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
  caber:{ru:"вмещаться",pres:["quepo","cabes","cabe","cabemos","cabéis","caben"]},
@@ -116,41 +158,56 @@ const VERBS={
  huir:{ru:"убегать",pres:["huyo","huyes","huye","huimos","huís","huyen"]},
  andar:{ru:"ходить пешком",pres:["ando","andas","anda","andamos","andáis","andan"]}
 };
-const ORDER=Object.keys(VERBS).slice(0,30);
-const PRET_SPECIAL={ser:["fui","fuiste","fue","fuimos","fuisteis","fueron"],ir:["fui","fuiste","fue","fuimos","fuisteis","fueron"],dar:["di","diste","dio","dimos","disteis","dieron"],ver:["vi","viste","vio","vimos","visteis","vieron"],dormir:["dormí","dormiste","durmió","dormimos","dormisteis","durmieron"],pedir:["pedí","pediste","pidió","pedimos","pedisteis","pidieron"],preferir:["preferí","preferiste","prefirió","preferimos","preferisteis","prefirieron"],caer:["caí","caíste","cayó","caímos","caísteis","cayeron"],elegir:["elegí","elegiste","eligió","elegimos","elegisteis","eligieron"],huir:["huí","huiste","huyó","huimos","huisteis","huyeron"]};
-const FUTURO_STEM={decir:"dir",hacer:"har",poder:"podr",querer:"querr",saber:"sabr",tener:"tendr",venir:"vendr",poner:"pondr",salir:"saldr",caber:"cabr",valer:"valdr"};
-const FUT_END=["é","ás","á","emos","éis","án"];
-function fut(v){const s=FUTURO_STEM[v]||v;return FUT_END.map(e=>s+e);}
-function pret(v){if(PRET_SPECIAL[v])return PRET_SPECIAL[v];const r=v.slice(0,-2),e=v.slice(-2);if(e==="ar")return[r+"é",r+"aste",r+"ó",r+"amos",r+"asteis",r+"aron"];return[r+"í",r+"iste",r+"ió",r+"imos",r+"isteis",r+"ieron"];}
+const ORDER=Object.keys(VERBS);
+function fut(v){const e=["é","ás","á","emos","éis","án"];return e.map(s=>v+"r"+s);}
+function pret(v){const r=v.slice(0,-2),e=v.slice(-2);if(e==="ar")return[r+"é",r+"aste",r+"ó",r+"amos",r+"asteis",r+"aron"];return[r+"í",r+"iste",r+"ió",r+"imos",r+"isteis","ieron"];}
 
 const select=document.getElementById('verbSelect');
-const rows=document.getElementById('rows');
 const panel=document.getElementById('panel');
 const verbLine=document.getElementById('verbLine');
+const table=document.getElementById('table');
+const examples=document.getElementById('examples');
 const tabs=document.querySelectorAll('.tab');
+const prevBtn=document.getElementById('prevVerb');
 const nextBtn=document.getElementById('nextVerb');
-let currentTense='pres';let currentIndex=0;
+let currentIndex=0;let currentTense='pres';
 
-function fillSelect(){select.innerHTML='<option value="">Selecciona un verbo</option>'+ORDER.map(v=>`<option value="${v}">${v}</option>`).join('');}
+function fillSelect(){
+ select.innerHTML='<option value="">Selecciona un verbo</option>'+
+ ORDER.map(v=>`<option value="${v}">${v}</option>`).join('');
+}
 fillSelect();
 
 function render(v){
  if(!v)return;
- const meta=VERBS[v];verbLine.textContent=`${v} — ${meta.ru}`;
+ const meta=VERBS[v];
  const forms=currentTense==='pres'?meta.pres:currentTense==='past'?pret(v):fut(v);
- rows.innerHTML="";
+ verbLine.innerHTML=`${v} <span>— ${meta.ru}</span>`;
+ table.innerHTML="";
  forms.forEach((f,i)=>{
-  const r=document.createElement('div');
-  r.className='rows';
-  r.innerHTML=`<div class="cell">${PRON[i]}</div><div class="cell forma">${f}</div><div class="cell ejemplo">${EX[currentTense][i].replace("{{f}}",f)}</div>`;
-  rows.appendChild(r);
+   const row=document.createElement('div');
+   row.className='table';
+   row.innerHTML=`<div class="cell">${PRON[i]}</div><div class="cell forma">${f}</div>`;
+   table.appendChild(row);
  });
- panel.hidden=false;
+ examples.innerHTML="";
+ forms.forEach((f,i)=>{
+   const [es,ru]=EX[currentTense][i];
+   const block=document.createElement('div');
+   block.className='ex-item';
+   block.innerHTML=`<div class="es">${es.replace("{{f}}",f)}</div><div class="ru">${ru.replace("{{f}}",translateVerb(f))}</div>`;
+   examples.appendChild(block);
+ });
+ panel.hidden=false;examples.hidden=false;
+}
+function translateVerb(f){
+  const endings=["o","as","es","a","e","amos","emos","imos","áis","éis","ís","an","en"];
+  for(let e of endings){if(f.endsWith(e)){return f.slice(0,-e.length);}}
+  return f;
 }
 tabs.forEach(t=>t.addEventListener('click',()=>{
  tabs.forEach(tb=>tb.classList.remove('active'));
- t.classList.add('active');
- currentTense=t.dataset.tense;
+ t.classList.add('active');currentTense=t.dataset.tense;
  render(select.value||ORDER[currentIndex]);
 }));
 select.addEventListener('change',()=>{
@@ -159,8 +216,11 @@ select.addEventListener('change',()=>{
 });
 nextBtn.addEventListener('click',()=>{
  currentIndex=(currentIndex+1)%ORDER.length;
- select.value=ORDER[currentIndex];
- render(select.value);
+ select.value=ORDER[currentIndex];render(select.value);
+});
+prevBtn.addEventListener('click',()=>{
+ currentIndex=(currentIndex-1+ORDER.length)%ORDER.length;
+ select.value=ORDER[currentIndex];render(select.value);
 });
 </script>
 </body>

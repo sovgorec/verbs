@@ -13,38 +13,39 @@
 *{box-sizing:border-box;}
 body{
   margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
-  display:flex;flex-direction:column;align-items:center;padding:16px;padding-bottom:90px;
+  display:flex;flex-direction:column;align-items:center;padding:14px;padding-bottom:90px;
 }
 .wrap{width:100%;max-width:700px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-h1{font-size:18px;font-weight:800;margin:0}
-.count{font-size:14px;color:var(--muted);font-weight:500}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+h1{font-size:17px;font-weight:800;margin:0}
+.count{font-size:13px;color:var(--muted);font-weight:500}
 select{
-  width:100%;padding:12px 14px;font-size:15px;font-weight:500;
+  width:100%;padding:10px 12px;font-size:14px;font-weight:500;
   border:1px solid var(--border);border-radius:12px;background:#fff;
-  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:14px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:12px;
 }
 .card{
-  background:#fff;border:1px solid var(--border);border-radius:16px;
-  box-shadow:0 4px 12px rgba(16,24,40,.05);overflow:hidden;margin-bottom:14px;
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  box-shadow:0 3px 10px rgba(16,24,40,.05);overflow:hidden;margin-bottom:12px;
 }
-.card-hd{padding:14px 16px;border-bottom:1px solid var(--border);}
-.verb-line{font-size:20px;font-weight:700;}
-.verb-line span{font-weight:500;color:var(--muted);font-size:15px;margin-left:8px;}
+.card-hd{padding:12px 14px;border-bottom:1px solid var(--border);}
+.verb-line{font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.verb-line span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px;}
 .table{display:grid;grid-template-columns:1fr 1fr;}
 .cell{
-  padding:12px 16px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;font-size:16px;
+  padding:10px 12px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;font-size:14px;
+  overflow-wrap:break-word;word-break:keep-all;
 }
-.cell.forma{justify-content:flex-end;font-size:20px;font-weight:700;}
+.cell.forma{justify-content:flex-end;font-size:18px;font-weight:700;overflow:hidden;text-overflow:ellipsis;}
 .examples{
-  background:#fff;border:1px solid var(--border);border-radius:16px;
-  box-shadow:0 4px 12px rgba(16,24,40,.05);padding:14px 16px;margin-bottom:14px;
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  box-shadow:0 3px 10px rgba(16,24,40,.05);padding:12px 14px;margin-bottom:12px;
 }
-.ex-item{margin-bottom:10px;}
+.ex-item{margin-bottom:8px;}
 .ex-item:last-child{margin-bottom:0;}
-.es{font-size:15px;font-weight:600;}
-.ru{font-size:14px;color:var(--muted);}
+.es{font-size:14px;font-weight:600;}
+.ru{font-size:13px;color:var(--muted);}
 .footer{
   position:fixed;bottom:0;left:0;width:100%;
   background:#fff;border-top:1px solid var(--border);
@@ -52,11 +53,11 @@ select{
   box-shadow:0 -2px 10px rgba(0,0,0,0.05);
 }
 button.nav{
-  flex:1;margin:0 4px;padding:14px 0;font-size:16px;font-weight:700;
+  flex:1;margin:0 4px;padding:12px 0;font-size:15px;font-weight:700;
   border:none;border-radius:12px;color:#fff;background:var(--accent);
-  display:flex;align-items:center;justify-content:center;gap:8px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
 }
-button.nav svg{width:16px;height:16px;fill:#fff;}
+button.nav svg{width:15px;height:15px;fill:#fff;}
 button.nav:active{background:var(--accent-hover);}
 </style>
 </head>
@@ -148,10 +149,10 @@ function generateExamples(verb,forms){
   const set={
     ser:[["soy feliz","Я счастлив"],["eres mi amigo","Ты мой друг"],["es profesor","Он преподаватель"],["somos de España","Мы из Испании"],["sois buenos","Вы хорошие"],["son amigos","Они друзья"]],
     tener:[["tengo un coche","У меня есть машина"],["tienes tiempo","У тебя есть время"],["tiene una casa","У него есть дом"],["tenemos hambre","Мы голодны"],["tenéis suerte","Вам повезло"],["tienen hijos","У них есть дети"]],
-    hacer:[["hago deporte","Я занимаюсь спортом"],["haces café","Ты готовишь кофе"],["hace calor","Жарко"],["hacemos la cena","Мы готовим ужин"],["hacéis ruido","Вы шумите"],["hacen ejercicio","Они тренируются"]]
+    hacer:[["hago deporte","Я занимаюсь спортом"],["haces café","Ты готовишь кофе"],["hace calor","Жарко"],["hacemos la cena","Мы готовим ужин"],["hacéis ruido","Вы шумите"],["hacen ejercicio","Они тренируются"]],
+    querer:[["quiero aprender","Я хочу учиться"],["quieres café","Ты хочешь кофе"],["quiere salir","Он хочет выйти"],["queremos descansar","Мы хотим отдохнуть"],["queréis saber","Вы хотите знать"],["quieren venir","Они хотят прийти"]]
   };
   if(set[verb]) return set[verb];
-  // fallback: универсальный шаблон
   return PRON.map((p,i)=>[`${p} ${forms[i]} hoy`,`Я ${ru}`]);
 }
 

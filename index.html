@@ -29,23 +29,30 @@ select{
   box-shadow:0 3px 10px rgba(16,24,40,.05);overflow:hidden;margin-bottom:12px;
 }
 .card-hd{padding:12px 14px;border-bottom:1px solid var(--border);}
-.verb-line{font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.verb-line{font-size:18px;font-weight:700;}
 .verb-line span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px;}
-.table{display:grid;grid-template-columns:1fr 1fr;}
-.cell{
-  padding:10px 12px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;font-size:14px;
-  overflow-wrap:break-word;word-break:keep-all;
+.table2col{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border-top:1px solid var(--border);
 }
-.cell.forma{justify-content:flex-end;font-size:18px;font-weight:700;overflow:hidden;text-overflow:ellipsis;}
+.col{
+  border-right:1px solid var(--border);
+}
+.row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 12px;border-bottom:1px solid var(--border);
+  font-size:15px;
+}
+.row span.forma{font-size:18px;font-weight:700;}
 .examples{
   background:#fff;border:1px solid var(--border);border-radius:14px;
   box-shadow:0 3px 10px rgba(16,24,40,.05);padding:12px 14px;margin-bottom:12px;
 }
-.ex-item{margin-bottom:8px;}
+.ex-item{margin-bottom:10px;}
 .ex-item:last-child{margin-bottom:0;}
-.es{font-size:14px;font-weight:600;}
-.ru{font-size:13px;color:var(--muted);}
+.es{font-size:17px;font-weight:600;}
+.ru{font-size:15px;color:var(--muted);}
 .footer{
   position:fixed;bottom:0;left:0;width:100%;
   background:#fff;border-top:1px solid var(--border);
@@ -76,7 +83,10 @@ button.nav:active{background:var(--accent-hover);}
     <div class="card-hd">
       <div class="verb-line" id="verbLine">—</div>
     </div>
-    <div id="table" class="table"></div>
+    <div id="table2col" class="table2col">
+      <div class="col" id="col-left"></div>
+      <div class="col" id="col-right"></div>
+    </div>
   </section>
 
   <section id="examples" class="examples" hidden></section>
@@ -102,37 +112,15 @@ const VERBS={
  hacer:{ru:"делать",pres:["hago","haces","hace","hacemos","hacéis","hacen"]},
  decir:{ru:"сказать",pres:["digo","dices","dice","decimos","decís","dicen"]},
  poder:{ru:"мочь",pres:["puedo","puedes","puede","podemos","podéis","pueden"]},
- querer:{ru:"хотеть",pres:["quiero","quieres","quiere","queremos","queréis","quieren"]},
- venir:{ru:"приходить",pres:["vengo","vienes","viene","venimos","venís","vienen"]},
- poner:{ru:"класть",pres:["pongo","pones","pone","ponemos","ponéis","ponen"]},
- salir:{ru:"уходить",pres:["salgo","sales","sale","salimos","salís","salen"]},
- ver:{ru:"видеть",pres:["veo","ves","ve","vemos","veis","ven"]},
- dar:{ru:"давать",pres:["doy","das","da","damos","dais","dan"]},
- saber:{ru:"знать",pres:["sé","sabes","sabe","sabemos","sabéis","saben"]},
- traer:{ru:"приносить",pres:["traigo","traes","trae","traemos","traéis","traen"]},
- oír:{ru:"слышать",pres:["oigo","oyes","oye","oímos","oís","oyen"]},
- jugar:{ru:"играть",pres:["juego","juegas","juega","jugamos","jugáis","juegan"]},
- pensar:{ru:"думать",pres:["pienso","piensas","piensa","pensamos","pensáis","piensan"]},
- dormir:{ru:"спать",pres:["duermo","duermes","duerme","dormimos","dormís","duermen"]},
- pedir:{ru:"просить",pres:["pido","pides","pide","pedimos","pedís","piden"]},
- preferir:{ru:"предпочитать",pres:["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"]},
- volver:{ru:"возвращаться",pres:["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"]},
- encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"]},
- construir:{ru:"строить",pres:["construyo","construyes","construye","construimos","construís","construyen"]},
- conducir:{ru:"вести (машину)",pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
- caber:{ru:"вмещаться",pres:["quepo","cabes","cabe","cabemos","cabéis","caben"]},
- valer:{ru:"стоить",pres:["valgo","vales","vale","valemos","valéis","valen"]},
- caer:{ru:"падать",pres:["caigo","caes","cae","caemos","caéis","caen"]},
- elegir:{ru:"выбирать",pres:["elijo","eliges","elige","elegimos","elegís","eligen"]},
- huir:{ru:"убегать",pres:["huyo","huyes","huye","huimos","huís","huyen"]},
- andar:{ru:"ходить пешком",pres:["ando","andas","anda","andamos","andáis","andan"]}
+ querer:{ru:"хотеть",pres:["quiero","quieres","quiere","queremos","queréis","quieren"]}
 };
 const ORDER=Object.keys(VERBS);
 
 const select=document.getElementById('verbSelect');
 const panel=document.getElementById('panel');
 const verbLine=document.getElementById('verbLine');
-const table=document.getElementById('table');
+const colLeft=document.getElementById('col-left');
+const colRight=document.getElementById('col-right');
 const examples=document.getElementById('examples');
 const prevBtn=document.getElementById('prevVerb');
 const nextBtn=document.getElementById('nextVerb');
@@ -161,20 +149,17 @@ function render(v){
   const meta=VERBS[v];
   const forms=meta.pres;
   verbLine.innerHTML=`${v} <span>— ${meta.ru}</span>`;
-  table.innerHTML="";
-  forms.forEach((f,i)=>{
-    const row=document.createElement('div');
-    row.className='table';
-    row.innerHTML=`<div class="cell">${PRON[i]}</div><div class="cell forma">${f}</div>`;
-    table.appendChild(row);
-  });
+  colLeft.innerHTML=""; colRight.innerHTML="";
+  for(let i=0;i<3;i++){
+    colLeft.innerHTML+=`<div class="row"><span>${PRON[i]}</span><span class="forma">${forms[i]}</span></div>`;
+  }
+  for(let i=3;i<6;i++){
+    colRight.innerHTML+=`<div class="row"><span>${PRON[i]}</span><span class="forma">${forms[i]}</span></div>`;
+  }
   examples.innerHTML="";
   const ex=generateExamples(v,forms);
   ex.forEach(([es,ru])=>{
-    const block=document.createElement('div');
-    block.className='ex-item';
-    block.innerHTML=`<div class="es">${es}</div><div class="ru">${ru}</div>`;
-    examples.appendChild(block);
+    examples.innerHTML+=`<div class="ex-item"><div class="es">${es}</div><div class="ru">${ru}</div></div>`;
   });
   panel.hidden=false;examples.hidden=false;
 }

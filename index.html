@@ -3,79 +3,51 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verbos Irregulares — Mobile</title>
+<title>Verbos irregulares</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f8fb; --card:#fff; --text:#0b1220; --muted:#667085;
-  --accent:#1a936f; --accent-hover:#157d5e; --border:#e3e8ef; --focus:#2b7cff;
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;
+  --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;--focus:#2b7cff;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
+*{box-sizing:border-box;}
 body{
-  margin:0; background:var(--bg); color:var(--text);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  display:flex; flex-direction:column; align-items:center; padding:16px;
-  padding-bottom:calc(16px + var(--safe-bottom));
+  margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
+  display:flex;flex-direction:column;align-items:center;padding:16px;padding-bottom:90px;
 }
-.wrap{width:100%; max-width:700px}
-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
-h1{font-size:18px; font-weight:800; margin:0}
-.badge{font-size:12px; color:#fff; background:var(--accent); padding:6px 10px; border-radius:999px; font-weight:700}
-.select{
-  width:100%; display:flex; gap:10px; margin-bottom:10px;
-}
+.wrap{width:100%;max-width:700px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+h1{font-size:18px;font-weight:800;margin:0}
+.badge{font-size:12px;color:#fff;background:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700}
 select{
-  width:100%; padding:12px 14px; font-size:15px; font-weight:500;
-  border:1px solid var(--border); border-radius:12px; background:#fff;
-  box-shadow:0 1px 3px rgba(16,24,40,.05); outline:none;
+  width:100%;padding:12px 14px;font-size:15px;font-weight:500;
+  border:1px solid var(--border);border-radius:12px;background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:10px;
 }
-select:focus{border-color:var(--focus); box-shadow:0 0 0 3px rgba(43,124,255,.15)}
-
-/* tabs for tenses */
-.tabs{display:flex; gap:8px; margin-bottom:10px}
+.tabs{display:flex;gap:8px;margin-bottom:10px;}
 .tab{
-  flex:1; text-align:center; padding:10px 12px; border-radius:12px; border:1px solid var(--border);
-  background:#fff; font-weight:700; font-size:14px; color:var(--text);
+  flex:1;text-align:center;padding:10px 12px;border-radius:12px;border:1px solid var(--border);
+  background:#fff;font-weight:700;font-size:14px;color:var(--text);
 }
-.tab.active{background:var(--accent); color:#fff; border-color:var(--accent)}
-
-/* card */
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .card{
-  background:#fff; border:1px solid var(--border); border-radius:16px;
-  box-shadow:0 8px 24px rgba(16,24,40,.06); overflow:hidden;
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 8px 24px rgba(16,24,40,.06);overflow:hidden;
 }
-.card-hd{
-  display:flex; justify-content:space-between; align-items:flex-start; gap:8px;
-  padding:14px 16px; border-bottom:1px solid var(--border);
+.card-hd{padding:14px 16px;border-bottom:1px solid var(--border);}
+.verb-line{font-size:20px;font-weight:800;}
+.verb-line span{font-weight:500;color:var(--muted);font-size:15px;margin-left:6px;}
+.rows{display:grid;grid-template-columns:90px 1fr 1.2fr;}
+.cell{padding:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;min-height:50px;}
+.forma{font-size:20px;font-weight:700;}
+.ejemplo{color:var(--muted);font-size:14px;}
+button#nextVerb{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 32px);max-width:680px;height:56px;
+  background:var(--accent);color:#fff;font-weight:700;font-size:17px;
+  border:none;border-radius:14px;box-shadow:0 4px 12px rgba(26,147,111,0.3);
 }
-.verb-title{font-size:22px; font-weight:800; letter-spacing:.2px}
-.sub{margin-top:2px; font-size:13px; color:var(--muted)}
-
-/* rows (3 cols, no header row) */
-.rows{display:grid; grid-template-columns:92px 1fr 1.2fr}
-.cell{
-  padding:12px 12px; border-bottom:1px solid var(--border);
-  display:flex; align-items:center; min-height:52px;
-}
-.forma{font-size:20px; font-weight:800; line-height:1.25}
-.ejemplo{color:var(--muted); font-size:14px; line-height:1.35}
-
-/* rules */
-.rules{
-  margin-top:12px; background:#fff; border:1px solid var(--border); border-radius:16px;
-  box-shadow:0 4px 14px rgba(16,24,40,.05); padding:12px 16px;
-}
-.rules h3{margin:0 0 6px 0; font-size:14px; text-transform:uppercase; color:var(--muted); letter-spacing:.3px}
-.rules ul{margin:6px 0 0 18px; padding:0}
-.rules li{margin:6px 0; color:#3a3f47; font-size:14px; line-height:1.35}
-
-@media (max-width:480px){
-  .rows{grid-template-columns:80px 1fr 1.2fr}
-  .forma{font-size:19px}
-  .verb-title{font-size:20px}
-}
+button#nextVerb:active{background:var(--accent-hover);}
 </style>
 </head>
 <body>
@@ -85,250 +57,111 @@ select:focus{border-color:var(--focus); box-shadow:0 0 0 3px rgba(43,124,255,.15
     <div class="badge">30 глаголов</div>
   </header>
 
-  <!-- выбор глагола -->
-  <div class="select">
-    <select id="verbSelect" aria-label="Selecciona un verbo">
-      <option value="">Selecciona un verbo</option>
-    </select>
+  <select id="verbSelect">
+    <option value="">Selecciona un verbo</option>
+  </select>
+
+  <div class="tabs">
+    <button class="tab active" data-tense="pres">Presente</button>
+    <button class="tab" data-tense="past">Pasado</button>
+    <button class="tab" data-tense="fut">Futuro</button>
   </div>
 
-  <!-- вкладки времен -->
-  <div class="tabs" role="tablist" aria-label="Tiempo verbal">
-    <button id="tab-pres" class="tab active" role="tab" aria-selected="true" data-tense="pres">Presente</button>
-    <button id="tab-past" class="tab" role="tab" aria-selected="false" data-tense="past">Pasado</button>
-    <button id="tab-fut" class="tab" role="tab" aria-selected="false" data-tense="fut">Futuro</button>
-  </div>
-
-  <!-- карточка -->
   <section id="panel" class="card" hidden>
     <div class="card-hd">
-      <div>
-        <div class="verb-title" id="verbTitle">—</div>
-        <div class="sub" id="verbRu">—</div>
-      </div>
-      <div class="sub" id="tenseLabel">Presente de indicativo</div>
+      <div class="verb-line" id="verbLine">—</div>
     </div>
-
-    <div id="rows" class="rows" role="table" aria-label="Conjugación"></div>
-  </section>
-
-  <!-- правила -->
-  <section class="rules">
-    <h3>Общие правила неправильных глаголов</h3>
-    <ul>
-      <li><b>Изменение корня</b>: <i>e→ie</i> (querer→<u>quiero</u>), <i>o→ue</i> (poder→<u>puedo</u>), <i>e→i</i> (pedir→<u>pido</u>) — обычно во всех лицах, кроме nosotros/vosotros.</li>
-      <li><b>Особый 1-е л. ед.ч.</b> в Presente: <i>tengo, hago, digo, vengo, salgo, traigo, oigo</i> и т.д.</li>
-      <li><b>Пре-терато (Pretérito Indefinido)</b>: многие имеют корень <i>tuv-, estuv-, pud-, pus-, sup-, quis-, vin-, hic-/hiz-, dij-, traj-, conduj-, cup-</i> + окончания <i>-e, -iste, -o, -imos, -isteis, -ieron</i> (у <i>dij-/traj-/conduj-</i> — <i>-eron</i>).</li>
-      <li><b>Futuro</b>: почти у всех регулярные окончания, но у <i>dir-, har-, podr-, querr-, sabr-, tendr-, vendr-, pondr-, saldr-, cabr-, valdr-</i> меняется корень.</li>
-      <li><b>Ser/Ir</b> уникальны в прошедшем: <i>fui, fuiste, fue, fuimos, fuisteis, fueron</i>. У <i>dar/ver</i> — короткие формы: <i>di/vi</i> и т.п.</li>
-    </ul>
+    <div id="rows" class="rows"></div>
   </section>
 </div>
 
+<button id="nextVerb">Siguiente verbo</button>
+
 <script>
-/* ===== helpers ===== */
-const PRON = ["yo","tú","él/ella","nosotros","vosotros","ellos"];
-
-/* Генерация примеров — короткие, естественные; подставляем форму {{f}}. */
-const EX = {
-  pres: [
-    "Yo {{f}} cada día.",
-    "Tú {{f}} sin dudar.",
-    "Él/Ella {{f}} cuando puede.",
-    "Nosotros {{f}} juntos a menudo.",
-    "Vosotros {{f}} en casa.",
-    "Ellos {{f}} con gusto."
-  ],
-  past: [
-    "Ayer yo {{f}} temprano.",
-    "Anoche tú {{f}} sin pausa.",
-    "Él/Ella {{f}} al final.",
-    "Nosotros {{f}} con amigos.",
-    "Vosotros {{f}} en el viaje.",
-    "Ellos {{f}} sin problemas."
-  ],
-  fut: [
-    "Mañana yo {{f}} sin falta.",
-    "Luego tú {{f}} si quieres.",
-    "Él/Ella {{f}} con calma.",
-    "Nosotros {{f}} otra vez.",
-    "Vosotros {{f}} después de clase.",
-    "Ellos {{f}} cuando toque."
-  ]
+const PRON=["yo","tú","él/ella","nosotros","vosotros","ellos"];
+const EX={
+ pres:["Yo {{f}} cada día.","Tú {{f}} sin dudar.","Él/Ella {{f}} cuando puede.","Nosotros {{f}} juntos.","Vosotros {{f}} en casa.","Ellos {{f}} con gusto."],
+ past:["Ayer yo {{f}} temprano.","Anoche tú {{f}} sin pausa.","Él/Ella {{f}} al final.","Nosotros {{f}} con amigos.","Vosotros {{f}} en el viaje.","Ellos {{f}} sin problemas."],
+ fut:["Mañana yo {{f}} sin falta.","Luego tú {{f}} si quieres.","Él/Ella {{f}} con calma.","Nosotros {{f}} otra vez.","Vosotros {{f}} después de clase.","Ellos {{f}} cuando toque."]
 };
-
-/* ===== data: present (hardcoded), RU translation =====
-   Preterite & Future вычисляем по правилам ниже. */
-const VERBS = {
-  // 1
-  ser:{ru:"быть (пост.)", pres:["soy","eres","es","somos","sois","son"]},
-  ir:{ru:"идти/ехать", pres:["voy","vas","va","vamos","vais","van"]},
-  tener:{ru:"иметь", pres:["tengo","tienes","tiene","tenemos","tenéis","tienen"]},
-  hacer:{ru:"делать", pres:["hago","haces","hace","hacemos","hacéis","hacen"]},
-  decir:{ru:"говорить/сказать", pres:["digo","dices","dice","decimos","decís","dicen"]},
-  poder:{ru:"мочь", pres:["puedo","puedes","puede","podemos","podéis","pueden"]},
-  querer:{ru:"хотеть/любить", pres:["quiero","quieres","quiere","queremos","queréis","quieren"]},
-  venir:{ru:"приходить", pres:["vengo","vienes","viene","venimos","venís","vienen"]},
-  poner:{ru:"класть/ставить", pres:["pongo","pones","pone","ponemos","ponéis","ponen"]},
-  salir:{ru:"выходить/уезжать", pres:["salgo","sales","sale","salimos","salís","salen"]},
-  // 11
-  ver:{ru:"видеть", pres:["veo","ves","ve","vemos","veis","ven"]},
-  dar:{ru:"давать", pres:["doy","das","da","damos","dais","dan"]},
-  saber:{ru:"знать (факты)", pres:["sé","sabes","sabe","sabemos","sabéis","saben"]},
-  traer:{ru:"приносить", pres:["traigo","traes","trae","traemos","traéis","traen"]},
-  oír:{ru:"слышать", pres:["oigo","oyes","oye","oímos","oís","oyen"]},
-  jugar:{ru:"играть", pres:["juego","juegas","juega","jugamos","jugáis","juegan"]},
-  pensar:{ru:"думать", pres:["pienso","piensas","piensa","pensamos","pensáis","piensan"]},
-  dormir:{ru:"спать", pres:["duermo","duermes","duerme","dormimos","dormís","duermen"]},
-  pedir:{ru:"просить/заказывать", pres:["pido","pides","pide","pedimos","pedís","piden"]},
-  preferir:{ru:"предпочитать", pres:["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"]},
-  // 21
-  volver:{ru:"возвращаться", pres:["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"]},
-  encontrar:{ru:"находить/встречать", pres:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"]},
-  construir:{ru:"строить", pres:["construyo","construyes","construye","construimos","construís","construyen"]},
-  conducir:{ru:"вести (машину)", pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
-  caber:{ru:"помещаться/вмещаться", pres:["quepo","cabes","cabe","cabemos","cabéis","caben"]},
-  valer:{ru:"стоить/иметь ценность", pres:["valgo","vales","vale","valemos","valéis","valen"]},
-  caer:{ru:"падать", pres:["caigo","caes","cae","caemos","caéis","caen"]},
-  elegir:{ru:"выбирать", pres:["elijo","eliges","elige","elegimos","elegís","eligen"]},
-  huir:{ru:"убегать", pres:["huyo","huyes","huye","huimos","huís","huyen"]},
-  andar:{ru:"идти пешком/ходить", pres:["ando","andas","anda","andamos","andáis","andan"]},
-  // 31? continue to 30:
-  traducir:{ru:"переводить", pres:["traduzco","traduces","traduce","traducimos","traducís","traducen"]},
-  producir:{ru:"производить", pres:["produzco","produces","produce","producimos","producís","producen"]},
-  sentir:{ru:"чувствовать", pres:["siento","sientes","siente","sentimos","sentís","sienten"]},
-  mantener:{ru:"поддерживать/сохранять", pres:["mantengo","mantienes","mantiene","mantenemos","mantenéis","mantienen"]},
-  traer2:{ru:"(вариант) привозить", pres:["traigo","traes","trae","traemos","traéis","traen"]}, // запасной, заменим ниже
+const VERBS={
+ ser:{ru:"быть (пост.)",pres:["soy","eres","es","somos","sois","son"]},
+ ir:{ru:"идти/ехать",pres:["voy","vas","va","vamos","vais","van"]},
+ tener:{ru:"иметь",pres:["tengo","tienes","tiene","tenemos","tenéis","tienen"]},
+ hacer:{ru:"делать",pres:["hago","haces","hace","hacemos","hacéis","hacen"]},
+ decir:{ru:"сказать",pres:["digo","dices","dice","decimos","decís","dicen"]},
+ poder:{ru:"мочь",pres:["puedo","puedes","puede","podemos","podéis","pueden"]},
+ querer:{ru:"хотеть",pres:["quiero","quieres","quiere","queremos","queréis","quieren"]},
+ venir:{ru:"приходить",pres:["vengo","vienes","viene","venimos","venís","vienen"]},
+ poner:{ru:"класть",pres:["pongo","pones","pone","ponemos","ponéis","ponen"]},
+ salir:{ru:"уходить",pres:["salgo","sales","sale","salimos","salís","salen"]},
+ ver:{ru:"видеть",pres:["veo","ves","ve","vemos","veis","ven"]},
+ dar:{ru:"давать",pres:["doy","das","da","damos","dais","dan"]},
+ saber:{ru:"знать",pres:["sé","sabes","sabe","sabemos","sabéis","saben"]},
+ traer:{ru:"приносить",pres:["traigo","traes","trae","traemos","traéis","traen"]},
+ oír:{ru:"слышать",pres:["oigo","oyes","oye","oímos","oís","oyen"]},
+ jugar:{ru:"играть",pres:["juego","juegas","juega","jugamos","jugáis","juegan"]},
+ pensar:{ru:"думать",pres:["pienso","piensas","piensa","pensamos","pensáis","piensan"]},
+ dormir:{ru:"спать",pres:["duermo","duermes","duerme","dormimos","dormís","duermen"]},
+ pedir:{ru:"просить",pres:["pido","pides","pide","pedimos","pedís","piden"]},
+ preferir:{ru:"предпочитать",pres:["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"]},
+ volver:{ru:"возвращаться",pres:["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"]},
+ encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"]},
+ construir:{ru:"строить",pres:["construyo","construyes","construye","construimos","construís","construyen"]},
+ conducir:{ru:"вести",pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
+ caber:{ru:"вмещаться",pres:["quepo","cabes","cabe","cabemos","cabéis","caben"]},
+ valer:{ru:"стоить",pres:["valgo","vales","vale","valemos","valéis","valen"]},
+ caer:{ru:"падать",pres:["caigo","caes","cae","caemos","caéis","caen"]},
+ elegir:{ru:"выбирать",pres:["elijo","eliges","elige","elegimos","elegís","eligen"]},
+ huir:{ru:"убегать",pres:["huyo","huyes","huye","huimos","huís","huyen"]},
+ andar:{ru:"ходить пешком",pres:["ando","andas","anda","andamos","andáis","andan"]}
 };
-/* Заменим лишний ключ, чтобы итог было ровно 30: уберём traer2 */
-delete VERBS.traer2;
+const ORDER=Object.keys(VERBS).slice(0,30);
+const PRET_SPECIAL={ser:["fui","fuiste","fue","fuimos","fuisteis","fueron"],ir:["fui","fuiste","fue","fuimos","fuisteis","fueron"],dar:["di","diste","dio","dimos","disteis","dieron"],ver:["vi","viste","vio","vimos","visteis","vieron"],dormir:["dormí","dormiste","durmió","dormimos","dormisteis","durmieron"],pedir:["pedí","pediste","pidió","pedimos","pedisteis","pidieron"],preferir:["preferí","preferiste","prefirió","preferimos","preferisteis","prefirieron"],caer:["caí","caíste","cayó","caímos","caísteis","cayeron"],elegir:["elegí","elegiste","eligió","elegimos","elegisteis","eligieron"],huir:["huí","huiste","huyó","huimos","huisteis","huyeron"]};
+const FUTURO_STEM={decir:"dir",hacer:"har",poder:"podr",querer:"querr",saber:"sabr",tener:"tendr",venir:"vendr",poner:"pondr",salir:"saldr",caber:"cabr",valer:"valdr"};
+const FUT_END=["é","ás","á","emos","éis","án"];
+function fut(v){const s=FUTURO_STEM[v]||v;return FUT_END.map(e=>s+e);}
+function pret(v){if(PRET_SPECIAL[v])return PRET_SPECIAL[v];const r=v.slice(0,-2),e=v.slice(-2);if(e==="ar")return[r+"é",r+"aste",r+"ó",r+"amos",r+"asteis",r+"aron"];return[r+"í",r+"iste",r+"ió",r+"imos",r+"isteis",r+"ieron"];}
 
-/* Список в нужном порядке (30 шт.) */
-const ORDER = ["ser","ir","tener","hacer","decir","poder","querer","venir","poner","salir",
-               "ver","dar","saber","traer","oír","jugar","pensar","dormir","pedir","preferir",
-               "volver","encontrar","construir","conducir","caber","valer","caer","elegir","huir","andar",
-               "traducir","producir","sentir","mantener"].slice(0,30);
+const select=document.getElementById('verbSelect');
+const rows=document.getElementById('rows');
+const panel=document.getElementById('panel');
+const verbLine=document.getElementById('verbLine');
+const tabs=document.querySelectorAll('.tab');
+const nextBtn=document.getElementById('nextVerb');
+let currentTense='pres';let currentIndex=0;
 
-/* ===== preterite & future generators ===== */
-
-/* Pretérito – специальные парадигмы */
-const PRET_SPECIAL = {
-  ser:["fui","fuiste","fue","fuimos","fuisteis","fueron"], // = ir
-  ir:["fui","fuiste","fue","fuimos","fuisteis","fueron"],
-  dar:["di","diste","dio","dimos","disteis","dieron"],
-  ver:["vi","viste","vio","vimos","visteis","vieron"],
-  oír:["oí","oíste","oyó","oímos","oísteis","oyeron"],
-  jugar:["jugué","jugaste","jugó","jugamos","jugasteis","jugaron"],
-  dormir:["dormí","dormiste","durmió","dormimos","dormisteis","durmieron"],
-  pedir:["pedí","pediste","pidió","pedimos","pedisteis","pidieron"],
-  preferir:["preferí","preferiste","prefirió","preferimos","preferisteis","prefirieron"],
-  construir:["construí","construiste","construyó","construimos","construisteis","construyeron"],
-  caer:["caí","caíste","cayó","caímos","caísteis","cayeron"],
-  elegir:["elegí","elegiste","eligió","elegimos","elegisteis","eligieron"],
-  huir:["huí","huiste","huyó","huimos","huisteis","huyeron"]
-};
-/* Irregular STEMs (con set de terminaciones) */
-const PRET_STEM = {
-  tener:"tuv", estar:"estuv", poder:"pud", poner:"pus", saber:"sup", querer:"quis",
-  venir:"vin", hacer:"hic", decir:"dij", traer:"traj", conducir:"conduj", traducir:"traduj",
-  producir:"produj", caber:"cup", andar:"anduv", mantener:"mantuv"
-};
-const PRET_END = ["e","iste","o","imos","isteis","ieron"];
-const PRET_END_J = ["e","iste","o","imos","isteis","eron"]; // для -dij/-traj/-conduj/-traduj/-produj
-
-function pret(verb){
-  if (PRET_SPECIAL[verb]) return PRET_SPECIAL[verb];
-  if (PRET_STEM[verb]){
-    const stem = PRET_STEM[verb];
-    const ends = stem.endsWith("j") ? PRET_END_J : PRET_END;
-    return ends.map((s,i)=> stem + s);
-  }
-  // по умолчанию – регулярный (например, volver, pensar, salir, valer...)
-  return regularPreterite(verb);
-}
-function regularPreterite(inf){
-  const r = inf.slice(0,-2), e = inf.slice(-2);
-  if (e==="ar") return [r+"é",r+"aste",r+"ó",r+"amos",r+"asteis",r+"aron"];
-  return [r+"í",r+"iste",r+"ió",r+"imos",r+"isteis",r+"ieron"];
-}
-
-/* Futuro – корни */
-const FUTURO_STEM = {
-  decir:"dir", hacer:"har", poder:"podr", querer:"querr", saber:"sabr",
-  tener:"tendr", venir:"vendr", poner:"pondr", salir:"saldr", caber:"cabr", valer:"valdr",
-  mantener:"mantendr"
-};
-const FUT_END = ["é","ás","á","emos","éis","án"];
-function fut(inf){
-  const stem = FUTURO_STEM[inf] ?? inf; // если нет особого корня – инфинитив
-  return FUT_END.map((e,i)=> stem + e);
-}
-
-/* ===== UI ===== */
-const verbSelect = document.getElementById('verbSelect');
-const rows = document.getElementById('rows');
-const panel = document.getElementById('panel');
-const verbTitle = document.getElementById('verbTitle');
-const verbRu = document.getElementById('verbRu');
-const tenseLabel = document.getElementById('tenseLabel');
-const tabs = document.querySelectorAll('.tab');
-let currentTense = 'pres'; // pres | past | fut
-
-/* заполнение селекта */
-function fillSelect(){
-  verbSelect.innerHTML = '<option value="">Selecciona un verbo</option>' +
-    ORDER.map(v=>`<option value="${v}">${v}</option>`).join('');
-}
+function fillSelect(){select.innerHTML='<option value="">Selecciona un verbo</option>'+ORDER.map(v=>`<option value="${v}">${v}</option>`).join('');}
 fillSelect();
 
-/* рендер строк */
-function renderRows(forms, tense){
-  rows.innerHTML = "";
-  for(let i=0;i<6;i++){
-    const r = document.createElement('div'); r.className = 'rows'; // grid на весь ряд
-    r.innerHTML = `
-      <div class="cell">${PRON[i]}</div>
-      <div class="cell forma">${forms[i]}</div>
-      <div class="cell ejemplo">${EX[tense][i].replace("{{f}}", forms[i])}</div>
-    `;
-    rows.appendChild(r);
-  }
+function render(v){
+ if(!v)return;
+ const meta=VERBS[v];verbLine.textContent=`${v} — ${meta.ru}`;
+ const forms=currentTense==='pres'?meta.pres:currentTense==='past'?pret(v):fut(v);
+ rows.innerHTML="";
+ forms.forEach((f,i)=>{
+  const r=document.createElement('div');
+  r.className='rows';
+  r.innerHTML=`<div class="cell">${PRON[i]}</div><div class="cell forma">${f}</div><div class="cell ejemplo">${EX[currentTense][i].replace("{{f}}",f)}</div>`;
+  rows.appendChild(r);
+ });
+ panel.hidden=false;
 }
-
-/* выбор времени */
-function setTense(tense){
-  currentTense = tense;
-  tabs.forEach(t=>t.classList.toggle('active', t.dataset.tense===tense));
-  tenseLabel.textContent = tense==="pres" ? "Presente de indicativo"
-                        : tense==="past" ? "Pretérito indefinido"
-                        : "Futuro simple";
-  // перерисуем, если уже выбран глагол
-  if (verbSelect.value) renderVerb(verbSelect.value);
-}
-
-/* основной рендер глагола */
-function renderVerb(v){
-  const meta = VERBS[v];
-  if(!meta){ panel.hidden = true; return; }
-  verbTitle.textContent = v;
-  verbRu.textContent = meta.ru ? "— " + meta.ru : "";
-
-  let forms;
-  if (currentTense === 'pres') forms = meta.pres;
-  else if (currentTense === 'past') forms = pret(v);
-  else forms = fut(v);
-
-  panel.hidden = false;
-  renderRows(forms, currentTense);
-  panel.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-/* события */
-verbSelect.addEventListener('change', ()=> renderVerb(verbSelect.value));
-tabs.forEach(t=> t.addEventListener('click', ()=> setTense(t.dataset.tense)));
-
-/* init */
-setTense('pres');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+ tabs.forEach(tb=>tb.classList.remove('active'));
+ t.classList.add('active');
+ currentTense=t.dataset.tense;
+ render(select.value||ORDER[currentIndex]);
+}));
+select.addEventListener('change',()=>{
+ currentIndex=ORDER.indexOf(select.value);
+ render(select.value);
+});
+nextBtn.addEventListener('click',()=>{
+ currentIndex=(currentIndex+1)%ORDER.length;
+ select.value=ORDER[currentIndex];
+ render(select.value);
+});
 </script>
 </body>
 </html>

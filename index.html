@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Verbos irregulares</title>
+<title>Verbos irregulares — Presente</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -13,27 +13,17 @@
 *{box-sizing:border-box;}
 body{
   margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
-  display:flex;flex-direction:column;align-items:center;padding:16px;
-  padding-bottom:90px;
+  display:flex;flex-direction:column;align-items:center;padding:16px;padding-bottom:90px;
 }
 .wrap{width:100%;max-width:700px}
-header{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
-}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 h1{font-size:18px;font-weight:800;margin:0}
 .count{font-size:14px;color:var(--muted);font-weight:500}
 select{
   width:100%;padding:12px 14px;font-size:15px;font-weight:500;
   border:1px solid var(--border);border-radius:12px;background:#fff;
-  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:10px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:14px;
 }
-.tabs{display:flex;gap:8px;margin-bottom:14px;}
-.tab{
-  flex:1;text-align:center;padding:10px 12px;border-radius:12px;
-  border:1px solid var(--border);background:#fff;font-weight:700;
-  font-size:14px;color:var(--text);
-}
-.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .card{
   background:#fff;border:1px solid var(--border);border-radius:16px;
   box-shadow:0 4px 12px rgba(16,24,40,.05);overflow:hidden;margin-bottom:14px;
@@ -47,8 +37,10 @@ select{
   display:flex;align-items:center;font-size:16px;
 }
 .cell.forma{justify-content:flex-end;font-size:20px;font-weight:700;}
-.examples{background:#fff;border:1px solid var(--border);border-radius:16px;
-  box-shadow:0 4px 12px rgba(16,24,40,.05);padding:14px 16px;margin-bottom:14px;}
+.examples{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 4px 12px rgba(16,24,40,.05);padding:14px 16px;margin-bottom:14px;
+}
 .ex-item{margin-bottom:10px;}
 .ex-item:last-child{margin-bottom:0;}
 .es{font-size:15px;font-weight:600;}
@@ -62,7 +54,9 @@ select{
 button.nav{
   flex:1;margin:0 4px;padding:14px 0;font-size:16px;font-weight:700;
   border:none;border-radius:12px;color:#fff;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;gap:8px;
 }
+button.nav svg{width:16px;height:16px;fill:#fff;}
 button.nav:active{background:var(--accent-hover);}
 </style>
 </head>
@@ -77,12 +71,6 @@ button.nav:active{background:var(--accent-hover);}
     <option value="">Selecciona un verbo</option>
   </select>
 
-  <div class="tabs">
-    <button class="tab active" data-tense="pres">Presente</button>
-    <button class="tab" data-tense="past">Pasado</button>
-    <button class="tab" data-tense="fut">Futuro</button>
-  </div>
-
   <section id="panel" class="card" hidden>
     <div class="card-hd">
       <div class="verb-line" id="verbLine">—</div>
@@ -94,38 +82,18 @@ button.nav:active{background:var(--accent-hover);}
 </div>
 
 <div class="footer">
-  <button id="prevVerb" class="nav">◀️ Назад</button>
-  <button id="nextVerb" class="nav">Далее ▶️</button>
+  <button id="prevVerb" class="nav">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+    Назад
+  </button>
+  <button id="nextVerb" class="nav">
+    Далее
+    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
 </div>
 
 <script>
 const PRON=["yo","tú","él/ella","nosotros","vosotros","ellos"];
-const EX={
- pres:[
-  ["Yo {{f}} cada día.","Я {{f}} каждый день."],
-  ["Tú {{f}} sin dudar.","Ты {{f}} без сомнений."],
-  ["Él/Ella {{f}} cuando puede.","Он/Она {{f}}, когда может."],
-  ["Nosotros {{f}} juntos.","Мы {{f}} вместе."],
-  ["Vosotros {{f}} en casa.","Вы {{f}} дома."],
-  ["Ellos {{f}} con gusto.","Они {{f}} с удовольствием."]
- ],
- past:[
-  ["Ayer yo {{f}} temprano.","Вчера я {{f}} рано."],
-  ["Anoche tú {{f}} sin pausa.","Прошлой ночью ты {{f}} без остановки."],
-  ["Él/Ella {{f}} al final.","Он/Она {{f}} в конце."],
-  ["Nosotros {{f}} con amigos.","Мы {{f}} с друзьями."],
-  ["Vosotros {{f}} en el viaje.","Вы {{f}} во время поездки."],
-  ["Ellos {{f}} sin problemas.","Они {{f}} без проблем."]
- ],
- fut:[
-  ["Mañana yo {{f}} sin falta.","Завтра я {{f}} обязательно."],
-  ["Luego tú {{f}} si quieres.","Потом ты {{f}}, если захочешь."],
-  ["Él/Ella {{f}} con calma.","Он/Она {{f}} спокойно."],
-  ["Nosotros {{f}} otra vez.","Мы {{f}} снова."],
-  ["Vosotros {{f}} después de clase.","Вы {{f}} после занятий."],
-  ["Ellos {{f}} cuando toque.","Они {{f}} когда придёт время."]
- ]
-};
 const VERBS={
  ser:{ru:"быть (пост.)",pres:["soy","eres","es","somos","sois","son"]},
  ir:{ru:"идти/ехать",pres:["voy","vas","va","vamos","vais","van"]},
@@ -148,9 +116,9 @@ const VERBS={
  pedir:{ru:"просить",pres:["pido","pides","pide","pedimos","pedís","piden"]},
  preferir:{ru:"предпочитать",pres:["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"]},
  volver:{ru:"возвращаться",pres:["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"]},
- encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentра","encontramos","encontráis","encuentran"]},
+ encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"]},
  construir:{ru:"строить",pres:["construyo","construyes","construye","construimos","construís","construyen"]},
- conducir:{ru:"вести",pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
+ conducir:{ru:"вести (машину)",pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
  caber:{ru:"вмещаться",pres:["quepo","cabes","cabe","cabemos","cabéis","caben"]},
  valer:{ru:"стоить",pres:["valgo","vales","vale","valemos","valéis","valen"]},
  caer:{ru:"падать",pres:["caigo","caes","cae","caemos","caéis","caen"]},
@@ -159,68 +127,70 @@ const VERBS={
  andar:{ru:"ходить пешком",pres:["ando","andas","anda","andamos","andáis","andan"]}
 };
 const ORDER=Object.keys(VERBS);
-function fut(v){const e=["é","ás","á","emos","éis","án"];return e.map(s=>v+"r"+s);}
-function pret(v){const r=v.slice(0,-2),e=v.slice(-2);if(e==="ar")return[r+"é",r+"aste",r+"ó",r+"amos",r+"asteis",r+"aron"];return[r+"í",r+"iste",r+"ió",r+"imos",r+"isteis","ieron"];}
 
 const select=document.getElementById('verbSelect');
 const panel=document.getElementById('panel');
 const verbLine=document.getElementById('verbLine');
 const table=document.getElementById('table');
 const examples=document.getElementById('examples');
-const tabs=document.querySelectorAll('.tab');
 const prevBtn=document.getElementById('prevVerb');
 const nextBtn=document.getElementById('nextVerb');
-let currentIndex=0;let currentTense='pres';
+let currentIndex=0;
 
 function fillSelect(){
- select.innerHTML='<option value="">Selecciona un verbo</option>'+
- ORDER.map(v=>`<option value="${v}">${v}</option>`).join('');
+  select.innerHTML='<option value="">Selecciona un verbo</option>'+
+    ORDER.map(v=>`<option value="${v}">${v}</option>`).join('');
 }
 fillSelect();
 
+function generateExamples(verb,forms){
+  const ru=VERBS[verb].ru;
+  const set={
+    ser:[["soy feliz","Я счастлив"],["eres mi amigo","Ты мой друг"],["es profesor","Он преподаватель"],["somos de España","Мы из Испании"],["sois buenos","Вы хорошие"],["son amigos","Они друзья"]],
+    tener:[["tengo un coche","У меня есть машина"],["tienes tiempo","У тебя есть время"],["tiene una casa","У него есть дом"],["tenemos hambre","Мы голодны"],["tenéis suerte","Вам повезло"],["tienen hijos","У них есть дети"]],
+    hacer:[["hago deporte","Я занимаюсь спортом"],["haces café","Ты готовишь кофе"],["hace calor","Жарко"],["hacemos la cena","Мы готовим ужин"],["hacéis ruido","Вы шумите"],["hacen ejercicio","Они тренируются"]]
+  };
+  if(set[verb]) return set[verb];
+  // fallback: универсальный шаблон
+  return PRON.map((p,i)=>[`${p} ${forms[i]} hoy`,`Я ${ru}`]);
+}
+
 function render(v){
- if(!v)return;
- const meta=VERBS[v];
- const forms=currentTense==='pres'?meta.pres:currentTense==='past'?pret(v):fut(v);
- verbLine.innerHTML=`${v} <span>— ${meta.ru}</span>`;
- table.innerHTML="";
- forms.forEach((f,i)=>{
-   const row=document.createElement('div');
-   row.className='table';
-   row.innerHTML=`<div class="cell">${PRON[i]}</div><div class="cell forma">${f}</div>`;
-   table.appendChild(row);
- });
- examples.innerHTML="";
- forms.forEach((f,i)=>{
-   const [es,ru]=EX[currentTense][i];
-   const block=document.createElement('div');
-   block.className='ex-item';
-   block.innerHTML=`<div class="es">${es.replace("{{f}}",f)}</div><div class="ru">${ru.replace("{{f}}",translateVerb(f))}</div>`;
-   examples.appendChild(block);
- });
- panel.hidden=false;examples.hidden=false;
+  if(!v)return;
+  const meta=VERBS[v];
+  const forms=meta.pres;
+  verbLine.innerHTML=`${v} <span>— ${meta.ru}</span>`;
+  table.innerHTML="";
+  forms.forEach((f,i)=>{
+    const row=document.createElement('div');
+    row.className='table';
+    row.innerHTML=`<div class="cell">${PRON[i]}</div><div class="cell forma">${f}</div>`;
+    table.appendChild(row);
+  });
+  examples.innerHTML="";
+  const ex=generateExamples(v,forms);
+  ex.forEach(([es,ru])=>{
+    const block=document.createElement('div');
+    block.className='ex-item';
+    block.innerHTML=`<div class="es">${es}</div><div class="ru">${ru}</div>`;
+    examples.appendChild(block);
+  });
+  panel.hidden=false;examples.hidden=false;
 }
-function translateVerb(f){
-  const endings=["o","as","es","a","e","amos","emos","imos","áis","éis","ís","an","en"];
-  for(let e of endings){if(f.endsWith(e)){return f.slice(0,-e.length);}}
-  return f;
-}
-tabs.forEach(t=>t.addEventListener('click',()=>{
- tabs.forEach(tb=>tb.classList.remove('active'));
- t.classList.add('active');currentTense=t.dataset.tense;
- render(select.value||ORDER[currentIndex]);
-}));
+
 select.addEventListener('change',()=>{
- currentIndex=ORDER.indexOf(select.value);
- render(select.value);
+  currentIndex=ORDER.indexOf(select.value);
+  render(select.value);
 });
 nextBtn.addEventListener('click',()=>{
- currentIndex=(currentIndex+1)%ORDER.length;
- select.value=ORDER[currentIndex];render(select.value);
+  currentIndex=(currentIndex+1)%ORDER.length;
+  select.value=ORDER[currentIndex];
+  render(select.value);
 });
 prevBtn.addEventListener('click',()=>{
- currentIndex=(currentIndex-1+ORDER.length)%ORDER.length;
- select.value=ORDER[currentIndex];render(select.value);
+  currentIndex=(currentIndex-1+ORDER.length)%ORDER.length;
+  select.value=ORDER[currentIndex];
+  render(select.value);
 });
 </script>
 </body>

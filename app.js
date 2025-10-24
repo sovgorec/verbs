@@ -3,80 +3,121 @@ const REFLEX_PRON = ["me", "te", "se", "nos", "os", "se"];
 
 let currentCategory = "";
 let currentVerb = "";
+let currentTense = "presente"; // по умолчанию
 let isReflex = false;
 
+// элементы DOM
 const categorySelect = document.getElementById("categorySelect");
 const verbSelect = document.getElementById("verbSelect");
 const reflexSwitch = document.getElementById("reflexSwitch");
-const panel = document.getElementById("panel");
 const verbLine = document.getElementById("verbLine");
+const panel = document.getElementById("panel");
 const colLeft = document.getElementById("col-left");
 const colRight = document.getElementById("col-right");
 const examples = document.getElementById("examples");
+const message = document.getElementById("message");
 const nextBtn = document.getElementById("nextVerb");
 const prevBtn = document.getElementById("prevVerb");
+const tabPast = document.getElementById("tabPast");
+const tabPresent = document.getElementById("tabPresent");
+const tabFuture = document.getElementById("tabFuture");
 
-// 🔹 Инициализация списка категорий
+// ======= 1. Категории =======
 function loadCategories() {
   categorySelect.innerHTML = "";
   Object.keys(VERB_DATA).forEach(cat => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    categorySelect.appendChild(option);
+    const opt = document.createElement("option");
+    opt.value = cat;
+    opt.textContent = cat;
+    categorySelect.appendChild(opt);
   });
-  categorySelect.value = Object.keys(VERB_DATA)[0];
-  loadVerbs(categorySelect.value);
+  currentCategory = Object.keys(VERB_DATA)[0];
+  loadVerbs(currentCategory);
 }
 
-// 🔹 Загрузка глаголов выбранной категории
+// ======= 2. Глаголы =======
 function loadVerbs(cat) {
   const verbs = Object.keys(VERB_DATA[cat]);
   verbSelect.innerHTML = "";
   verbs.forEach(v => {
-    const option = document.createElement("option");
-    option.value = v;
-    option.textContent = v;
-    verbSelect.appendChild(option);
+    const opt = document.createElement("option");
+    opt.value = v;
+    opt.textContent = v;
+    verbSelect.appendChild(opt);
   });
-  currentCategory = cat;
   currentVerb = verbs[0];
   renderVerb();
 }
 
-// 🔹 Отображение глагола
+// ======= 3. Отображение =======
 function renderVerb() {
-  const data = VERB_DATA[currentCategory][currentVerb];
-  const forms = data.pres;
-  const examplesData = isReflex && data.reflex ? data.reflex.examples : data.examples;
-  const displayForms = isReflex && data.reflex ? data.reflex.pres : data.pres;
+  const verbObj = VERB_DATA[currentCategory][currentVerb];
+  const hasReflex = verbObj.reflexive !== false;
+  const tenses = verbObj.tenses[currentTense];
+  const mode = isReflex && hasReflex ? "reflex" : "normal";
 
-  // Верхняя строка
-  verbLine.innerHTML = `${isReflex ? currentVerb + "se" : currentVerb} <span>— ${data.ru}${isReflex ? " (возв.)" : ""}</span>`;
-
-  // Таблица
-  colLeft.innerHTML = "";
-  colRight.innerHTML = "";
-  for (let i = 0; i < 3; i++) {
-    colLeft.innerHTML += `<div class="row"><span>${PRON[i]}</span><span class="forma">${isReflex ? REFLEX_PRON[i] + " " + displayForms[i] : displayForms[i]}</span></div>`;
+  // Проверки
+  if (!tenses) {
+    showMessage("Нет данных для этого времени.");
+    return;
   }
-  for (let i = 3; i < 6; i++) {
-    colRight.innerHTML += `<div class="row"><span>${PRON[i]}</span><span class="forma">${isReflex ? REFLEX_PRON[i] + " " + displayForms[i] : displayForms[i]}</span></div>`;
+  if (isReflex && !hasReflex) {
+    showMessage("Этот глагол не имеет возвратной формы.");
+    return;
+  }
+  if (isReflex && !tenses.reflex) {
+    showMessage("Возвратная форма не используется в этом времени.");
+    return;
   }
 
-  // Примеры
-  examples.innerHTML = "";
-  examplesData.forEach(([es, ru]) => {
-    examples.innerHTML += `<div class="ex-item"><div class="es">${es}</div><div class="ru">${ru}</div></div>`;
-  });
+  hideMessage();
 
+  const data = tenses[mode];
+  if (!data) {
+    showMessage("Нет данных для этой комбинации.");
+    return;
+  }
+
+  // верхняя строка
+  verbLine.innerHTML = `${isReflex ? currentVerb + "se" : currentVerb} <span>— ${verbObj.ru}</span>`;
   panel.hidden = false;
   examples.hidden = false;
+
+  // таблица
+  colLeft.innerHTML = "";
+  colRight.innerHTML = "";
+  const forms = data.forms;
+  for (let i = 0; i < 3; i++) {
+    const forma = isReflex ? REFLEX_PRON[i] + " " + forms[i] : forms[i];
+    colLeft.innerHTML += `<div class="row"><span>${PRON[i]}</span><span class="forma">${forma}</span></div>`;
+  }
+  for (let i = 3; i < 6; i++) {
+    const forma = isReflex ? REFLEX_PRON[i] + " " + forms[i] : forms[i];
+    colRight.innerHTML += `<div class="row"><span>${PRON[i]}</span><span class="forma">${forma}</span></div>`;
+  }
+
+  // примеры
+  examples.innerHTML = "";
+  data.examples.forEach(([es, ru]) => {
+    examples.innerHTML += `<div class="ex-item"><div class="es">${es}</div><div class="ru">${ru}</div></div>`;
+  });
 }
 
-// 🔹 Слушатели событий
+// ======= 4. Сообщения =======
+function showMessage(txt) {
+  message.hidden = false;
+  message.textContent = txt;
+  panel.hidden = true;
+  examples.hidden = true;
+}
+function hideMessage() {
+  message.hidden = true;
+}
+
+// ======= 5. Слушатели =======
 categorySelect.addEventListener("change", () => {
-  loadVerbs(categorySelect.value);
+  currentCategory = categorySelect.value;
+  loadVerbs(currentCategory);
 });
 
 verbSelect.addEventListener("change", () => {
@@ -90,23 +131,31 @@ reflexSwitch.addEventListener("click", () => {
   renderVerb();
 });
 
-nextBtn.addEventListener("click", () => {
-  const verbs = Object.keys(VERB_DATA[currentCategory]);
-  let idx = verbs.indexOf(currentVerb);
-  idx = (idx + 1) % verbs.length;
-  currentVerb = verbs[idx];
-  verbSelect.value = currentVerb;
-  renderVerb();
-});
+[nextBtn, prevBtn].forEach(btn =>
+  btn.addEventListener("click", e => {
+    const verbs = Object.keys(VERB_DATA[currentCategory]);
+    let idx = verbs.indexOf(currentVerb);
+    if (e.target.id === "nextVerb") idx = (idx + 1) % verbs.length;
+    else idx = (idx - 1 + verbs.length) % verbs.length;
+    currentVerb = verbs[idx];
+    verbSelect.value = currentVerb;
+    renderVerb();
+  })
+);
 
-prevBtn.addEventListener("click", () => {
-  const verbs = Object.keys(VERB_DATA[currentCategory]);
-  let idx = verbs.indexOf(currentVerb);
-  idx = (idx - 1 + verbs.length) % verbs.length;
-  currentVerb = verbs[idx];
-  verbSelect.value = currentVerb;
+// ======= 6. Переключение времен =======
+function setTense(t) {
+  currentTense = t;
+  [tabPast, tabPresent, tabFuture].forEach(tab => tab.classList.remove("active"));
+  if (t === "pasado") tabPast.classList.add("active");
+  if (t === "presente") tabPresent.classList.add("active");
+  if (t === "futuro") tabFuture.classList.add("active");
   renderVerb();
-});
+}
 
-// 🔹 Старт
+tabPast.addEventListener("click", () => setTense("pasado"));
+tabPresent.addEventListener("click", () => setTense("presente"));
+tabFuture.addEventListener("click", () => setTense("futuro"));
+
+// ======= 7. Инициализация =======
 loadCategories();

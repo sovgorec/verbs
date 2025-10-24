@@ -2,101 +2,217 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>VerboPlay 3.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#f6f8fb">
 <style>
-:root{
+:root {
   --bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;
   --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;
 }
-body{
-  margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
-  display:flex;flex-direction:column;align-items:center;padding:16px;padding-bottom:120px;
+body {
+  margin:0;
+  background:var(--bg);
+  font-family:Inter,sans-serif;
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
 }
-.wrap{width:100%;max-width:700px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-h1{font-size:18px;font-weight:800;margin:0}
-.count{font-size:13px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:8px;}
-.switch{
-  position:relative;width:38px;height:22px;background:var(--border);
-  border-radius:20px;cursor:pointer;transition:background .2s ease;
+.wrap {
+  width:100%;
+  max-width:700px;
+  padding:16px;
+  box-sizing:border-box;
+  flex:1;
+  overflow:hidden;
 }
-.switch::after{
-  content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;
-  border-radius:50%;transition:transform .2s ease;
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
 }
-.switch.on{background:var(--accent);}
-.switch.on::after{transform:translateX(16px);}
-select{
-  width:100%;padding:10px 12px;font-size:14px;font-weight:500;
-  border:1px solid var(--border);border-radius:12px;background:#fff;
-  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:10px;
+h1 {
+  font-size:18px;
+  font-weight:800;
+  margin:0;
 }
-.tense-tabs{display:flex;justify-content:space-between;gap:6px;margin-bottom:10px;}
-.tense-tab{
-  flex:1;text-align:center;padding:10px 0;border:1px solid var(--border);
-  border-radius:12px;background:#fff;font-size:14px;font-weight:600;cursor:pointer;
+.count {
+  font-size:13px;
+  color:var(--muted);
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
-.tense-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-.card{
-  background:#fff;border:1px solid var(--border);border-radius:14px;
-  box-shadow:0 3px 10px rgba(16,24,40,.05);overflow:hidden;margin-bottom:12px;
+.switch {
+  position:relative;
+  width:38px;
+  height:22px;
+  background:var(--border);
+  border-radius:20px;
+  cursor:pointer;
+  transition:background .2s ease;
 }
-.card-hd{padding:12px 14px;border-bottom:1px solid var(--border);}
-.verb-line{font-size:18px;font-weight:700;}
-.verb-line span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px;}
-.table2col{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--border);}
-.col{border-right:1px solid var(--border);}
-.row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:15px;}
-.row span.forma{font-size:18px;font-weight:700;}
-.examples{
-  background:#fff;border:1px solid var(--border);border-radius:14px;
-  box-shadow:0 3px 10px rgba(16,24,40,.05);padding:12px 14px;margin-bottom:12px;
+.switch::after {
+  content:"";
+  position:absolute;
+  top:3px; left:3px;
+  width:16px; height:16px;
+  background:#fff;
+  border-radius:50%;
+  transition:transform .2s ease;
 }
-.ex-item{margin-bottom:10px;}
-.ex-item:last-child{margin-bottom:0;}
-.es{font-size:18px;font-weight:600;}
-.ru{font-size:15px;color:var(--muted);}
-.message{
-  background:#fff;border:1px solid var(--border);border-radius:12px;
-  padding:14px;text-align:center;color:var(--muted);font-size:15px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.03);margin-bottom:12px;
+.switch.on { background:var(--accent); }
+.switch.on::after { transform:translateX(16px); }
+
+select {
+  width:100%;
+  padding:10px 12px;
+  font-size:14px;
+  font-weight:500;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom:10px;
 }
-.footer{
+
+.tense-tabs {
+  display:flex;
+  justify-content:space-between;
+  gap:6px;
+  margin-bottom:10px;
+}
+.tense-tab {
+  flex:1;
+  text-align:center;
+  padding:10px 0;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  user-select:none;
+}
+.tense-tab.active {
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.card {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:0 3px 10px rgba(16,24,40,.05);
+  overflow:hidden;
+  margin-bottom:12px;
+}
+.card-hd {
+  padding:12px 14px;
+  border-bottom:1px solid var(--border);
+}
+.verb-line {
+  font-size:18px;
+  font-weight:700;
+}
+.verb-line span {
+  font-weight:500;
+  color:var(--muted);
+  font-size:14px;
+  margin-left:6px;
+}
+
+.table2col {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border-top:1px solid var(--border);
+}
+.col { border-right:1px solid var(--border); }
+.row {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  font-size:15px;
+  line-height:1;
+}
+.row span.forma {
+  font-size:18px;
+  font-weight:700;
+}
+
+.examples {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:0 3px 10px rgba(16,24,40,.05);
+  padding:12px 14px;
+  margin-bottom:12px;
+  overflow:hidden;
+}
+.ex-item { margin-bottom:10px; }
+.ex-item:last-child { margin-bottom:0; }
+.es { font-size:18px; font-weight:600; }
+.ru { font-size:15px; color:var(--muted); }
+
+.message {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
+  color:var(--muted);
+  font-size:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.03);
+  margin-bottom:12px;
+}
+
+.footer {
   position:fixed;
-  bottom:calc(env(safe-area-inset-bottom) + 35px);
-  left:0;width:100%;
+  bottom:calc(env(safe-area-inset-bottom) + 25px);
+  left:0;
+  width:100%;
   background:#fff;
   border-top:1px solid var(--border);
   display:flex;
   justify-content:space-between;
-  padding:10px 16px;
+  padding:10px 14px;
   box-shadow:0 -2px 10px rgba(0,0,0,0.05);
-  border-radius:12px 12px 0 0;
 }
-.footer::after{
-  content:"";
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:calc(env(safe-area-inset-bottom) + 35px);
-  background:#fff;
-  z-index:-1;
+button.nav {
+  flex:1;
+  margin:0 4px;
+  padding:12px 0;
+  font-size:15px;
+  font-weight:700;
+  border:none;
+  border-radius:12px;
+  color:#fff;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  touch-action:manipulation;
 }
-button.nav{flex:1;margin:0 4px;padding:12px 0;font-size:15px;font-weight:700;border:none;border-radius:12px;color:#fff;background:var(--accent);
-display:flex;align-items:center;justify-content:center;gap:6px;}
-button.nav svg{width:15px;height:15px;fill:#fff;}
-button.nav:active{background:var(--accent-hover);}
+button.nav svg { width:15px; height:15px; fill:#fff; }
+button.nav:active { background:var(--accent-hover); }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="mainWrap">
   <header>
-    <h1>🇪🇸</h1>
+    <h1>🇪🇸 VerboPlay</h1>
     <div class="count">Reflexivo <div id="reflexSwitch" class="switch"></div></div>
   </header>
 
@@ -122,9 +238,19 @@ button.nav:active{background:var(--accent-hover);}
 </div>
 
 <div class="footer">
-  <button id="prevVerb" class="nav"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Atrás</button>
-  <button id="nextVerb" class="nav">Siguiente<svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+  <button id="prevVerb" class="nav" ontouchstart="vibrate()">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Atrás
+  </button>
+  <button id="nextVerb" class="nav" ontouchstart="vibrate()">
+    Siguiente<svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
 </div>
+
+<script>
+function vibrate() {
+  if (navigator.vibrate) navigator.vibrate(15);
+}
+</script>
 
 <script src="verbsData.js"></script>
 <script src="app.js"></script>

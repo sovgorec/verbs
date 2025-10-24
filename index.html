@@ -3,65 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f6f8fb">
-<title>Verbos irregulares</title>
+<title>Verbos — Aprende Español</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon.svg">
+<link rel="icon" type="image/png" href="icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#f6f8fb">
 <style>
-:root{--bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;--accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);display:flex;flex-direction:column;align-items:center;padding:14px;padding-bottom:120px}
+:root{
+  --bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;
+  --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--bg);font-family:Inter,sans-serif;color:var(--text);
+  display:flex;flex-direction:column;align-items:center;padding:14px;padding-bottom:120px;
+}
 .wrap{width:100%;max-width:700px}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 h1{font-size:17px;font-weight:800;margin:0}
-.count{font-size:13px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:10px}
-.switch-wrap{display:flex;align-items:center;gap:8px}
-.switch-label{font-size:13px;color:var(--muted)}
-.switch{position:relative;width:40px;height:22px;background:var(--border);border-radius:999px;cursor:pointer;transition:background .2s}
-.switch::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s}
-.switch.on{background:var(--accent)}
-.switch.on::after{transform:translateX(18px)}
-select{width:100%;padding:10px 12px;font-size:14px;font-weight:500;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:12px}
-.card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 3px 10px rgba(16,24,40,.05);overflow:hidden;margin-bottom:12px}
-.card-hd{padding:12px 14px;border-bottom:1px solid var(--border)}
-.verb-line{font-size:18px;font-weight:700}
-.verb-line span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px}
-.table2col{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--border)}
-.col{border-right:1px solid var(--border)}
-.row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:15px}
-.row .forma{font-size:18px;font-weight:700}
-.examples{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 3px 10px rgba(16,24,40,.05);padding:12px 14px;margin-bottom:12px}
-.ex-item{margin-bottom:10px}
-.ex-item:last-child{margin-bottom:0}
-.es{font-size:20px;font-weight:600}
-.ru{font-size:16px;color:var(--muted)}
-.footer{position:fixed;bottom:70px;left:0;width:100%;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:space-between;padding:10px 16px;box-shadow:0 -2px 10px rgba(0,0,0,.05);border-radius:12px 12px 0 0}
-.footer::after{content:"";position:fixed;bottom:0;left:0;width:100%;height:70px;background:#fff;z-index:-1}
-button.nav{flex:1;margin:0 4px;padding:12px 0;font-size:15px;font-weight:700;border:none;border-radius:12px;color:#fff;background:var(--accent);display:flex;align-items:center;justify-content:center;gap:6px}
-button.nav svg{width:15px;height:15px;fill:#fff}
-button.nav:active{background:var(--accent-hover)}
+.count{font-size:13px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:8px;}
+.switch{
+  position:relative;width:38px;height:22px;
+  background:var(--border);border-radius:20px;cursor:pointer;
+  transition:background .2s ease;
+}
+.switch::after{
+  content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;
+  background:#fff;border-radius:50%;transition:transform .2s ease;
+}
+.switch.on{background:var(--accent);}
+.switch.on::after{transform:translateX(16px);}
+select{
+  width:100%;padding:10px 12px;font-size:14px;font-weight:500;
+  border:1px solid var(--border);border-radius:12px;background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:12px;
+}
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  box-shadow:0 3px 10px rgba(16,24,40,.05);overflow:hidden;margin-bottom:12px;
+}
+.card-hd{padding:12px 14px;border-bottom:1px solid var(--border);}
+.verb-line{font-size:18px;font-weight:700;}
+.verb-line span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px;}
+.table2col{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--border);}
+.col{border-right:1px solid var(--border);}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:15px;}
+.row span.forma{font-size:18px;font-weight:700;}
+.examples{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 3px 10px rgba(16,24,40,.05);padding:12px 14px;margin-bottom:12px;}
+.ex-item{margin-bottom:10px;}
+.ex-item:last-child{margin-bottom:0;}
+.es{font-size:20px;font-weight:600;}
+.ru{font-size:16px;color:var(--muted);}
+.footer{
+  position:fixed;
+  bottom:calc(env(safe-area-inset-bottom) + 35px);
+  left:0;width:100%;
+  background:#fff;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  padding:10px 16px;
+  box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+  border-radius:12px 12px 0 0;
+}
+.footer::after{
+  content:"";
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:calc(env(safe-area-inset-bottom) + 35px);
+  background:#fff;
+  z-index:-1;
+}
+button.nav{flex:1;margin:0 4px;padding:12px 0;font-size:15px;font-weight:700;border:none;border-radius:12px;color:#fff;background:var(--accent);
+display:flex;align-items:center;justify-content:center;gap:6px;}
+button.nav svg{width:15px;height:15px;fill:#fff;}
+button.nav:active{background:var(--accent-hover);}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>🇪🇸 Verbos irregulares</h1>
-    <div class="count">
-      <span id="countLabel">30 глаголов</span>
-      <div class="switch-wrap" title="Возвратный глагол">
-        <span class="switch-label">возвратный</span>
-        <div id="reflexSwitch" class="switch" role="switch" aria-checked="false" tabindex="0"></div>
-      </div>
-    </div>
+    <h1>🇪🇸 Verbos</h1>
+    <div class="count">Reflexivo <div id="reflexSwitch" class="switch" title="Возвратный"></div></div>
   </header>
 
-  <select id="verbSelect"><option value="">Selecciona un verbo</option></select>
+  <select id="categorySelect"></select>
+  <select id="verbSelect"></select>
 
   <section id="panel" class="card" hidden>
     <div class="card-hd"><div class="verb-line" id="verbLine">—</div></div>
-    <div class="table2col">
+    <div id="table2col" class="table2col">
       <div class="col" id="col-left"></div>
       <div class="col" id="col-right"></div>
     </div>
@@ -75,181 +109,7 @@ button.nav:active{background:var(--accent-hover)}
   <button id="nextVerb" class="nav">Далее<svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
 </div>
 
-<script type="text/javascript">
-/* ====== ДАННЫЕ И ЛОГИКА ====== */
-const PRON=["yo","tú","él/ella","nosotros","vosotros","ellos"];
-const REFLEX_PRON=["me","te","se","nos","os","se"];
-
-const VERBS={
- ser:{ru:"быть (пост.)",pres:["soy","eres","es","somos","sois","son"]},
- ir:{ru:"идти/ехать",pres:["voy","vas","va","vamos","vais","van"]},
- tener:{ru:"иметь",pres:["tengo","tienes","tiene","tenemos","tenéis","tienen"]},
- hacer:{ru:"делать",pres:["hago","haces","hace","hacemos","hacéis","hacen"]},
- decir:{ru:"говорить",pres:["digo","dices","dice","decimos","decís","dicen"]},
- poder:{ru:"мочь",pres:["puedo","puedes","puede","podemos","podéis","pueden"]},
- querer:{ru:"хотеть",pres:["quiero","quieres","quiere","queremos","queréis","quieren"]},
- venir:{ru:"приходить",pres:["vengo","vienes","viene","venimos","venís","vienen"]},
- poner:{ru:"класть",pres:["pongo","pones","pone","ponemos","ponéis","ponen"]},
- salir:{ru:"выходить",pres:["salgo","sales","sale","salimos","salís","salen"]},
- ver:{ru:"видеть",pres:["veo","ves","ve","vemos","veis","ven"]},
- dar:{ru:"давать",pres:["doy","das","da","damos","dais","dan"]},
- saber:{ru:"знать",pres:["sé","sabes","sabe","sabemos","sabéis","saben"]},
- traer:{ru:"приносить",pres:["traigo","traes","trae","traemos","traéis","traen"]},
- oir:{ru:"слышать",pres:["oigo","oyes","oye","oímos","oís","oyen"]},
- jugar:{ru:"играть",pres:["juego","juegas","juega","jugamos","jugáis","juegan"]},
- pensar:{ru:"думать",pres:["pienso","piensas","piensa","pensamos","pensáis","piensan"]},
- dormir:{ru:"спать",pres:["duermo","duermes","duerme","dormimos","dormís","duermen"]},
- pedir:{ru:"просить",pres:["pido","pides","pide","pedimos","pedís","piden"]},
- preferir:{ru:"предпочитать",pres:["prefiero","prefieres","prefiere","preferimos","preferís","prefieren"]},
- volver:{ru:"возвращаться",pres:["vuelvo","vuelves","vuelve","volvemos","volvéis","vuelven"]},
- encontrar:{ru:"находить",pres:["encuentro","encuentras","encuentra","encontramos","encontráis","encuentran"]},
- construir:{ru:"строить",pres:["construyo","construyes","construye","construimos","construís","construyen"]},
- conducir:{ru:"вести (машину)",pres:["conduzco","conduces","conduce","conducimos","conducís","conducen"]},
- caber:{ru:"вмещаться",pres:["quepo","cabes","cabe","cabemos","cabéis","caben"]},
- valer:{ru:"стоить/цениться",pres:["valgo","vales","vale","valemos","valéis","valen"]},
- caer:{ru:"падать/нравиться",pres:["caigo","caes","cae","caemos","caéis","caen"]},
- elegir:{ru:"выбирать",pres:["elijo","eliges","elige","elegimos","elegís","eligen"]},
- huir:{ru:"убегать/избегать",pres:["huyo","huyes","huye","huimos","huís","huyen"]},
- andar:{ru:"ходить пешком",pres:["ando","andas","anda","andamos","andáis","andan"]}
-};
-const ORDER=Object.keys(VERBS);
-
-/* Естественные примеры (Presente) для всех 30 */
-const EXAMPLES={
- ser:[["soy feliz","Я счастлив"],["eres mi amigo","Ты мой друг"],["es profesor","Он/Она преподаватель"],["somos de España","Мы из Испании"],["sois puntuales","Вы пунктуальны"],["son amigos","Они друзья"]],
- ir:[["voy al trabajo","Я иду на работу"],["vas a casa","Ты идёшь домой"],["va al médico","Он/Она идёт к врачу"],["vamos juntos","Мы идём вместе"],["vais en coche","Вы едете на машине"],["van a la escuela","Они идут в школу"]],
- tener:[["tengo un coche","У меня есть машина"],["tienes tiempo","У тебя есть время"],["tiene una casa","У него/неё есть дом"],["tenemos hambre","Мы голодны"],["tenéis suerte","Вам везёт"],["tienen hijos","У них есть дети"]],
- hacer:[["hago deporte","Я занимаюсь спортом"],["haces café","Ты готовишь кофе"],["hace calor","Жарко"],["hacemos la cena","Мы готовим ужин"],["hacéis ruido","Вы шумите"],["hacen ejercicio","Они тренируются"]],
- decir:[["digo la verdad","Я говорю правду"],["dices que sí","Ты говоришь «да»"],["dice algo interesante","Он/Она говорит что-то интересное"],["decimos todo claro","Мы говорим ясно"],["decís la verdad","Вы говорите правду"],["dicen que vienen","Они говорят, что придут"]],
- poder:[["puedo ayudarte","Я могу помочь тебе"],["puedes entrar","Ты можешь войти"],["puede esperar","Он/Она может подождать"],["podemos verlo","Мы можем это увидеть"],["podéis practicar","Вы можете практиковаться"],["pueden empezar","Они могут начать"]],
- querer:[["quiero aprender","Я хочу учиться"],["quieres café","Ты хочешь кофе"],["quiere salir","Он/Она хочет выйти"],["queremos descansar","Мы хотим отдохнуть"],["queréis saber","Вы хотите знать"],["quieren venir","Они хотят прийти"]],
- venir:[["vengo temprano","Я прихожу рано"],["vienes conmigo","Ты идёшь со мной"],["viene ahora","Он/Она приходит сейчас"],["venimos a pie","Мы приходим пешком"],["venís luego","Вы придёте позже"],["vienen juntos","Они приходят вместе"]],
- poner:[["pongo la mesa","Я накрываю на стол"],["pones música","Ты включаешь музыку"],["pone atención","Он/Она обращает внимание"],["ponemos las sillas","Мы ставим стулья"],["ponéis orden","Вы наводите порядок"],["ponen reglas","Они устанавливают правила"]],
- salir:[["salgo tarde","Я ухожу поздно"],["sales ahora","Ты выходишь сейчас"],["sale con amigos","Он/Она выходит с друзьями"],["salimos a caminar","Мы выходим прогуляться"],["salís del trabajo","Вы выходите с работы"],["salen de casa","Они выходят из дома"]],
- ver:[["veo la luna","Я вижу луну"],["ves la diferencia","Ты видишь разницу"],["ve la película","Он/Она смотрит фильм"],["vemos el mar","Мы видим море"],["veis el problema","Вы видите проблему"],["ven las noticias","Они смотрят новости"]],
- dar:[["doy un regalo","Я дарю подарок"],["das las gracias","Ты благодаришь"],["da un consejo","Он/Она даёт совет"],["damos apoyo","Мы помогаем"],["dais un paso","Вы делаете шаг"],["dan resultados","Они дают результаты"]],
- saber:[["sé la respuesta","Я знаю ответ"],["sabes mucho","Ты много знаешь"],["sabe leer","Он/Она умеет читать"],["sabemos por qué","Мы знаем почему"],["sabéis el camino","Вы знаете дорогу"],["saben la verdad","Они знают правду"]],
- traer:[["traigo pan","Я приношу хлеб"],["traes flores","Ты приносишь цветы"],["trae noticias","Он/Она приносит новости"],["traemos comida","Мы приносим еду"],["traéis libros","Вы приносите книги"],["traen regalos","Они приносят подарки"]],
- oir:[["oigo música","Я слышу музыку"],["oyes la lluvia","Ты слышишь дождь"],["oye un ruido","Он/Она слышит шум"],["oímos tu voz","Мы слышим твой голос"],["oís el mar","Вы слышите море"],["oyen a los niños","Они слышат детей"]],
- jugar:[["juego al fútbol","Я играю в футбол"],["juegas muy bien","Ты играешь очень хорошо"],["juega con su hijo","Он/Она играет с сыном"],["jugamos cartas","Мы играем в карты"],["jugáis juntos","Вы играете вместе"],["juegan en el parque","Они играют в парке"]],
- pensar:[["pienso en ti","Я думаю о тебе"],["piensas demasiado","Ты слишком много думаешь"],["piensa rápido","Он/Она думает быстро"],["pensamos igual","Мы думаем одинаково"],["pensáis en el plan","Вы думаете о плане"],["piensan en el futuro","Они думают о будущем"]],
- dormir:[["duermo bien","Я хорошо сплю"],["duermes poco","Ты мало спишь"],["duerme ahora","Он/Она сейчас спит"],["dormimos ocho horas","Мы спим восемь часов"],["dormís la siesta","Вы спите днём"],["duermen profundamente","Они спят крепко"]],
- pedir:[["pido ayuda","Я прошу помощи"],["pides agua","Ты просишь воды"],["pide la cuenta","Он/Она просит счёт"],["pedimos información","Мы просим информацию"],["pedís permiso","Вы просите разрешение"],["piden más tiempo","Они просят больше времени"]],
- preferir:[["prefiero té","Я предпочитаю чай"],["prefieres café","Ты предпочитаешь кофе"],["prefiere quedarse","Он/Она предпочитает остаться"],["preferimos leer","Мы предпочитаем читать"],["preferís el tren","Вы предпочитаете поезд"],["prefieren trabajar","Они предпочитают работать"]],
- volver:[["vuelvo pronto","Я скоро вернусь"],["vuelves mañana","Ты вернёшься завтра"],["vuelve tarde","Он/Она возвращается поздно"],["volvemos a casa","Мы возвращаемся домой"],["volvéis del viaje","Вы возвращаетесь из поездки"],["vuelven juntos","Они возвращаются вместе"]],
- encontrar:[["encuentro la llave","Я нахожу ключ"],["encuentras la solución","Ты находишь решение"],["encuentra trabajo","Он/Она находит работу"],["encontramos un sitio","Мы находим место"],["encontráis el error","Вы находите ошибку"],["encuentran amigos","Они находят друзей"]],
- construir:[["construyo una casa","Я строю дом"],["construyes un puente","Ты строишь мост"],["construye modelos","Он/Она строит модели"],["construimos juntos","Мы строим вместе"],["construís rápido","Вы строите быстро"],["construyen escuelas","Они строят школы"]],
- conducir:[["conduzco despacio","Я веду медленно"],["conduces bien","Ты хорошо водишь"],["conduce de noche","Он/Она водит ночью"],["conducimos al trabajo","Мы едем на работу (за рулём)"],["conducís por la ciudad","Вы ездите по городу"],["conducen camiones","Они водят грузовики"]],
- caber:[["quepo aquí","Я помещаюсь здесь"],["cabes en el asiento","Ты помещаешься на сиденье"],["cabe en la caja","Он/Она помещается в коробку"],["cabemos todos","Мы все помещаемся"],["cabéis sin problema","Вы помещаетесь без проблем"],["caben en el coche","Они помещаются в машине"]],
- valer:[["valgo mucho para mi equipo","Я много значу для своей команды"],["vales más de lo que crees","Ты стоишь больше, чем думаешь"],["vale la pena","Это того стоит"],["valemos más unidos","Мы ценнее вместе"],["valéis por vuestra experiencia","Вы ценны опытом"],["valen en el mercado","Они ценятся на рынке"]],
- caer:[["caigo bien","Я нравлюсь людям"],["caes en la trampa","Ты попадаешь в ловушку"],["cae al suelo","Он/Она падает на землю"],["caemos en la cuenta","Мы осознаём"],["caéis a menudo","Вы часто падаете"],["caen las hojas","Опадают листья"]],
- elegir:[["elijo este libro","Я выбираю эту книгу"],["eliges el camino","Ты выбираешь путь"],["elige bien","Он/Она выбирает правильно"],["elegimos juntos","Мы выбираем вместе"],["elegís la opción","Вы выбираете вариант"],["eligen al líder","Они выбирают лидера"]],
- huir:[["huyo del ruido","Я убегаю от шума"],["huyes del problema","Ты избегаешь проблемы"],["huye rápido","Он/Она быстро убегает"],["huimos de la lluvia","Мы спасаемся от дождя"],["huís a tiempo","Вы вовремя ускользаете"],["huyen del peligro","Они убегают от опасности"]],
- andar:[["ando mucho","Я много хожу"],["andas rápido","Ты ходишь быстро"],["anda por el parque","Он/Она гуляет в парке"],["andamos cada día","Мы гуляем каждый день"],["andáis juntos","Вы ходите вместе"],["andan por la ciudad","Они ходят по городу"]]
-};
-
-/* При включении «возвратный» — формируем формы с me/te/se...
-   Примеры: аккуратно добавим местоимение перед формой, если глагол стоит первым словом. */
-function makeReflexForms(forms){return forms.map((f,i)=>REFLEX_PRON[i]+" "+f);}
-function makeReflexExamples(verb,forms){
-  const base=EXAMPLES[verb]||[];
-  if(base.length!==6){
-    return PRON.map((p,i)=>[p+" "+forms[i], "—"]);
-  }
-  return base.map((pair,i)=>{
-    const es=pair[0];
-    const f=forms[i];
-    // Если пример начинается с глагола или с местоимения + глагол — подставим рефлексивное местоимение перед формой
-    // Простая эвристика: заменим первое вхождение формы без префикса на "me/te/se ... форма"
-    const pron=REFLEX_PRON[i];
-    let esRef=es;
-    // вставим pron перед f, если f встречается
-    const idx=es.indexOf(forms[i]);
-    if(idx>=0){ esRef=es.slice(0,idx)+pron+" "+es.slice(idx); }
-    else { esRef=pron+" "+f+" "+es; }
-    const ru = pair[1]; // оставим тот же перевод (семантика близкая), при желании можно расширить
-    return [esRef, ru];
-  });
-}
-
-/* ====== UI ====== */
-const selectEl=document.getElementById("verbSelect");
-const panel=document.getElementById("panel");
-const verbLine=document.getElementById("verbLine");
-const colLeft=document.getElementById("col-left");
-const colRight=document.getElementById("col-right");
-const examplesEl=document.getElementById("examples");
-const prevBtn=document.getElementById("prevVerb");
-const nextBtn=document.getElementById("nextVerb");
-const reflexSwitch=document.getElementById("reflexSwitch");
-
-let currentIndex=0;
-let isReflex=false;
-
-function fillSelect(){
-  selectEl.innerHTML='<option value="">Selecciona un verbo</option>'+ORDER.map(v=>'<option value="'+v+'">'+v+'</option>').join('');
-}
-fillSelect();
-
-function render(verb){
-  if(!verb){panel.hidden=true;examplesEl.hidden=true;return;}
-  const meta=VERBS[verb];
-  let forms=meta.pres.slice();
-  let title=verb+" — "+meta.ru;
-
-  if(isReflex){
-    forms=makeReflexForms(forms);
-    title=verb+"se — "+meta.ru+" (возв.)";
-  }
-  verbLine.textContent=title;
-
-  // 2-колоночная таблица
-  colLeft.innerHTML=""; colRight.innerHTML="";
-  for(let i=0;i<3;i++){
-    colLeft.innerHTML+= '<div class="row"><span>'+PRON[i]+'</span><span class="forma">'+forms[i]+'</span></div>';
-  }
-  for(let i=3;i<6;i++){
-    colRight.innerHTML+= '<div class="row"><span>'+PRON[i]+'</span><span class="forma">'+forms[i]+'</span></div>';
-  }
-
-  // Примеры
-  let ex = EXAMPLES[verb] ? EXAMPLES[verb].slice() : PRON.map((p,i)=>[p+" "+meta.pres[i],"—"]);
-  if(isReflex){ ex = makeReflexExamples(verb, meta.pres); }
-
-  examplesEl.innerHTML="";
-  ex.forEach(([es,ru])=>{
-    examplesEl.innerHTML += '<div class="ex-item"><div class="es">'+es+'</div><div class="ru">'+ru+'</div></div>';
-  });
-
-  panel.hidden=false; examplesEl.hidden=false;
-}
-
-selectEl.addEventListener("change",()=>{
-  currentIndex=ORDER.indexOf(selectEl.value);
-  render(selectEl.value);
-});
-nextBtn.addEventListener("click",()=>{
-  currentIndex=(currentIndex+1)%ORDER.length;
-  selectEl.value=ORDER[currentIndex];
-  render(selectEl.value);
-});
-prevBtn.addEventListener("click",()=>{
-  currentIndex=(currentIndex-1+ORDER.length)%ORDER.length;
-  selectEl.value=ORDER[currentIndex];
-  render(selectEl.value);
-});
-function toggleReflex(){
-  isReflex=!isReflex;
-  reflexSwitch.classList.toggle("on", isReflex);
-  reflexSwitch.setAttribute("aria-checked", isReflex?"true":"false");
-  const v=ORDER[currentIndex] || selectEl.value;
-  if(v) render(v);
-}
-reflexSwitch.addEventListener("click", toggleReflex);
-reflexSwitch.addEventListener("keydown",(e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggleReflex(); }});
-
-// автоселект первого глагола для быстрого старта
-selectEl.value=ORDER[0]; render(ORDER[0]);
-</script>
+<script src="verbsData.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

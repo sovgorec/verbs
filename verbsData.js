@@ -472,10 +472,11 @@ const VERBS = {
                 { es:"Querréis volver aquí.", ru:"{ es:"Querrán quedarse más tiempo.", ru:"Они захотят остаться подольше." }
               ],
               examplesReflex: []
+                          ]
             }
           }
         }
       }
     }
   }
-}
+};

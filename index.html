@@ -214,36 +214,61 @@ button.nav svg { width:15px; height:15px; fill:#fff; }
 </div>
 
 <script>
-// Звук клика + вибрация
+// === Звук клика + вибрация ===
 const tap = (() => {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
   return () => {
     const o = ctx.createOscillator();
     const g = ctx.createGain();
-    o.type = "square"; o.frequency.value = 200;
+    o.type = "square";
+    o.frequency.value = 200;
     g.gain.value = 0.05;
-    o.connect(g); g.connect(ctx.destination);
-    o.start(); o.stop(ctx.currentTime + 0.08);
+    o.connect(g);
+    g.connect(ctx.destination);
+    o.start();
+    o.stop(ctx.currentTime + 0.08);
   };
 })();
+
 function haptic() {
   tap();
-  if (navigator.vibrate) navigator.vibrate(15);
+  if (navigator.vibrate) navigator.vibrate([10, 20, 10]); // лёгкая двойная вибрация
 }
 
-// Привязка нажатий
-["prevVerb","nextVerb","tabPast","tabPresent","tabFuture","reflexSwitch"].forEach(id=>{
-  const el=document.getElementById(id);
-  if(el) el.addEventListener("click",haptic);
+// === Привязка вибрации ко всем интерактивным элементам ===
+[
+  "prevVerb", "nextVerb",
+  "tabPast", "tabPresent", "tabFuture",
+  "categorySelect", "verbSelect",
+  "reflexSwitch"
+].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener("click", haptic);
 });
 
-// Отключаем зум и скролл
-document.addEventListener("gesturestart",e=>e.preventDefault());
-document.addEventListener("dblclick",e=>e.preventDefault());
-document.addEventListener("wheel",e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
-document.addEventListener("touchmove",e=>e.preventDefault(),{passive:false});
+// Также при изменении значений в селектах
+["categorySelect", "verbSelect"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener("change", haptic);
+});
+
+// === Отключаем масштабирование и скролл (эффект мобильного приложения) ===
+document.addEventListener("gesturestart", e => e.preventDefault());
+document.addEventListener("dblclick", e => e.preventDefault());
+document.addEventListener("wheel", e => {
+  if (e.ctrlKey) e.preventDefault();
+}, { passive: false });
+document.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
+
+// === Автоматическое исправление фокуса (чтобы не сдвигался экран на iOS) ===
+window.addEventListener("focusin", e => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
+    window.scrollTo(0, 0);
+  }
+});
 </script>
 
+<!-- Подключение JS файлов -->
 <script src="verbsData.js"></script>
 <script src="app.js"></script>
 </body>

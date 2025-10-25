@@ -479,7 +479,7 @@ examplesReflex: []
 }
       }
     }
-  }
+  },
   "В доме": {
 
   "cocinar": {

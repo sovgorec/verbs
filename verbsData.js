@@ -144,29 +144,31 @@ const VERBS = {
 
     // ===== Глагол IR =====
     "ir": {
-      ru: "идти, ехать",
-      reflexive: true,
-      tenses: {
-        presente: {
-          forms: ["voy","vas","va","vamos","vais","van"],
-          reflexForms: ["me voy","te vas","se va","nos vamos","os vais","se van"],
-          examples: [
-            { es:"Voy al trabajo en metro.", ru:"Я еду на работу на метро." },
-            { es:"Vas al gimnasio todos los días.", ru:"Ты ходишь в спортзал каждый день." },
-            { es:"Él va al colegio temprano.", ru:"Он рано идёт в школу." },
-            { es:"Vamos al cine esta noche.", ru:"Мы идём в кино сегодня вечером." },
-            { es:"Vais al parque con los niños.", ru:"Вы идёте в парк с детьми." },
-            { es:"Van al supermercado juntos.", ru:"Они идут вместе в супермаркет." }
-          ],
-          examplesReflex: [
-            { es:"Me voy a casa.", ru:"Я ухожу домой." },
-            { es:"Te vas muy temprano.", ru:"Ты уходишь очень рано." },
-            { es:"Se va del trabajo cansado.", ru:"Он уходит с работы уставшим." },
-            { es:"Nos vamos de vacaciones mañana.", ru:"Мы уезжаем в отпуск завтра." },
-            { es:"Os vais sin avisar.", ru:"Вы уходите, не предупредив." },
-            { es:"Se van a dormir.", ru:"Они ложатся спать." }
-          ]
-        },
+  ru: "идти, ехать",
+  reflexive: true,
+  tenses: {
+    presente: {
+      forms: ["voy","vas","va","vamos","vais","van"],
+      reflexForms: ["me voy","te vas","se va","nos vamos","os vais","se van"],
+      examples: [
+        { es:"Voy al trabajo en metro.", ru:"Я еду на работу на метро." },
+        { es:"Vas al gimnasio todos los días.", ru:"Ты ходишь в спортзал каждый день." },
+        { es:"Él va al colegio temprano.", ru:"Он рано идёт в школу." },
+        { es:"Vamos al cine esta noche.", ru:"Мы идём в кино сегодня вечером." },
+        { es:"Vais al parque con los niños.", ru:"Вы идёте в парк с детьми." },
+        { es:"Van al supermercado juntos.", ru:"Они идут вместе в супермаркет." }
+      ],
+      examplesReflex: [
+        { es:"Me voy a casa.", ru:"Я ухожу домой." },
+        { es:"Te vas muy temprano.", ru:"Ты уходишь очень рано." },
+        { es:"Se va del trabajo cansado.", ru:"Он уходит с работы уставшим." },
+        { es:"Nos vamos de vacaciones mañana.", ru:"Мы уезжаем в отпуск завтра." },
+        { es:"Os vais sin avisar.", ru:"Вы уходите, не предупредив." },
+        { es:"Se van a dormir.", ru:"Они ложатся спать." }
+      ]
+    }
+  }
+},
                 // ===== Глагол HACER =====
         "hacer": {
           ru: "делать, создавать",

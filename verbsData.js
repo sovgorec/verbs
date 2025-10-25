@@ -480,4 +480,162 @@ examplesReflex: []
       }
     }
   }
+  "В доме": {
+
+  "cocinar": {
+    ru: "готовить (еду)",
+    reflexive: false,
+    tenses: {
+      presente: {
+        forms: ["cocino","cocinas","cocina","cocinamos","cocináis","cocinan"],
+        examples: [
+          { es:"Cocino pasta los domingos.", ru:"Я готовлю пасту по воскресеньям." },
+          { es:"Cocinas muy bien.", ru:"Ты очень хорошо готовишь." },
+          { es:"Él cocina para toda la familia.", ru:"Он готовит для всей семьи." },
+          { es:"Cocinamos juntos los fines de semana.", ru:"Мы готовим вместе по выходным." },
+          { es:"Cocináis comida italiana.", ru:"Вы готовите итальянскую еду." },
+          { es:"Cocinan con mucho amor.", ru:"Они готовят с любовью." }
+        ]
+      },
+      pasado: {
+        forms: ["cociné","cocinaste","cocinó","cocinamos","cocinasteis","cocinaron"],
+        examples: [
+          { es:"Cociné una sopa deliciosa ayer.", ru:"Вчера я приготовил вкусный суп." },
+          { es:"Cocinaste para tus amigos.", ru:"Ты готовил для своих друзей." },
+          { es:"Él cocinó arroz con verduras.", ru:"Он приготовил рис с овощами." },
+          { es:"Cocinamos durante toda la tarde.", ru:"Мы готовили весь день." },
+          { es:"Cocinasteis algo nuevo.", ru:"Вы приготовили что-то новое." },
+          { es:"Cocinaron juntos para la cena.", ru:"Они вместе готовили ужин." }
+        ]
+      },
+      futuro: {
+        forms: ["cocinaré","cocinarás","cocinará","cocinaremos","cocinaréis","cocinarán"],
+        examples: [
+          { es:"Cocinaré esta noche.", ru:"Я приготовлю сегодня вечером." },
+          { es:"Cocinarás tu plato favorito.", ru:"Ты приготовишь своё любимое блюдо." },
+          { es:"Él cocinará para su novia.", ru:"Он приготовит для своей девушки." },
+          { es:"Cocinaremos algo especial.", ru:"Мы приготовим что-то особенное." },
+          { es:"Cocinaréis el desayuno mañana.", ru:"Вы приготовите завтрак завтра." },
+          { es:"Cocinarán juntos el domingo.", ru:"Они будут готовить вместе в воскресенье." }
+        ]
+      }
+    }
+  },
+
+  "limpiar": {
+    ru: "убирать, чистить",
+    reflexive: false,
+    tenses: {
+      presente: {
+        forms: ["limpio","limpias","limpia","limpiamos","limpiáis","limpian"],
+        examples: [
+          { es:"Limpio la cocina cada día.", ru:"Я убираю кухню каждый день." },
+          { es:"Limpias el baño los sábados.", ru:"Ты убираешь ванную по субботам." },
+          { es:"Él limpia la mesa después de comer.", ru:"Он вытирает стол после еды." },
+          { es:"Limpiamos el piso con aspiradora.", ru:"Мы чистим пол пылесосом." },
+          { es:"Limpiais vuestras habitaciones.", ru:"Вы убираете свои комнаты." },
+          { es:"Limpian toda la casa juntos.", ru:"Они убирают весь дом вместе." }
+        ]
+      },
+      pasado: {
+        forms: ["limpié","limpiaste","limpió","limpiamos","limpiasteis","limpiaron"],
+        examples: [
+          { es:"Limpié la nevera ayer.", ru:"Я почистил холодильник вчера." },
+          { es:"Limpiaste las ventanas.", ru:"Ты помыл окна." },
+          { es:"Él limpió su escritorio.", ru:"Он убрал свой стол." },
+          { es:"Limpiamos el garaje juntos.", ru:"Мы убрали гараж вместе." },
+          { es:"Limpiasteis el baño rápido.", ru:"Вы быстро убрали ванную." },
+          { es:"Limpiaron todo en una hora.", ru:"Они всё убрали за час." }
+        ]
+      },
+      futuro: {
+        forms: ["limpiaré","limpiarás","limpiará","limpiaremos","limpiaréis","limpiarán"],
+        examples: [
+          { es:"Limpiaré la casa mañana.", ru:"Я уберу дом завтра." },
+          { es:"Limpiarás el coche el domingo.", ru:"Ты помоешь машину в воскресенье." },
+          { es:"Él limpiará el baño más tarde.", ru:"Он уберёт ванную позже." },
+          { es:"Limpiaremos antes de la fiesta.", ru:"Мы уберём перед вечеринкой." },
+          { es:"Limpiaréis después de cenar.", ru:"Вы уберёте после ужина." },
+          { es:"Limpiarán el jardín pronto.", ru:"Они уберут сад скоро." }
+        ]
+      }
+    }
+  },
+
+  "levantarse": {
+    ru: "вставать, подниматься",
+    reflexive: true,
+    tenses: {
+      presente: {
+        forms: ["me levanto","te levantas","se levanta","nos levantamos","os levantáis","se levantan"],
+        examples: [
+          { es:"Me levanto a las siete.", ru:"Я встаю в семь утра." },
+          { es:"Te levantas temprano.", ru:"Ты встаёшь рано." },
+          { es:"Se levanta con energía.", ru:"Он встаёт с энергией." },
+          { es:"Nos levantamos juntos.", ru:"Мы встаём вместе." },
+          { es:"Os levantáis tarde los domingos.", ru:"Вы встаёте поздно по воскресеньям." },
+          { es:"Se levantan sin despertador.", ru:"Они встают без будильника." }
+        ]
+      },
+      pasado: {
+        forms: ["me levanté","te levantaste","se levantó","nos levantamos","os levantasteis","se levantaron"],
+        examples: [
+          { es:"Me levanté tarde ayer.", ru:"Я встал поздно вчера." },
+          { es:"Te levantaste cansado.", ru:"Ты встал уставшим." },
+          { es:"Se levantó a las ocho.", ru:"Он встал в восемь." },
+          { es:"Nos levantamos con lluvia.", ru:"Мы проснулись под дождь." },
+          { es:"Os levantasteis de buen humor.", ru:"Вы встали в хорошем настроении." },
+          { es:"Se levantaron antes del amanecer.", ru:"Они встали до рассвета." }
+        ]
+      },
+      futuro: {
+        forms: ["me levantaré","te levantarás","se levantará","nos levantaremos","os levantaréis","se levantarán"],
+        examples: [
+          { es:"Me levantaré temprano mañana.", ru:"Я встану рано завтра." },
+          { es:"Te levantarás a las seis.", ru:"Ты встанешь в шесть." },
+          { es:"Se levantará sin ayuda.", ru:"Он встанет без помощи." },
+          { es:"Nos levantaremos para ver el amanecer.", ru:"Мы встанем, чтобы увидеть рассвет." },
+          { es:"Os levantaréis pronto para viajar.", ru:"Вы встанете рано, чтобы поехать." },
+          { es:"Se levantarán con el sol.", ru:"Они встанут с восходом солнца." }
+        ]
+      }
+    }
+  },
+
+  "lavar": {
+    ru: "мыть, стирать",
+    reflexive: true,
+    tenses: {
+      presente: {
+        forms: ["lavo","lavas","lava","lavamos","laváis","lavan"],
+        examples: [
+          { es:"Lavo los platos después de comer.", ru:"Я мою посуду после еды." },
+          { es:"Lavas la ropa los sábados.", ru:"Ты стираешь по субботам." },
+          { es:"Él lava el coche cada semana.", ru:"Он моет машину каждую неделю." },
+          { es:"Lavamos las ventanas.", ru:"Мы моем окна." },
+          { es:"Laváis las manos antes de comer.", ru:"Вы моете руки перед едой." },
+          { es:"Lavan el suelo con agua caliente.", ru:"Они моют пол горячей водой." }
+        ]
+      }
+    }
+  },
+
+  "descansar": {
+    ru: "отдыхать",
+    reflexive: false,
+    tenses: {
+      presente: {
+        forms: ["descanso","descansas","descansa","descansamos","descansáis","descansan"],
+        examples: [
+          { es:"Descanso después de trabajar.", ru:"Я отдыхаю после работы." },
+          { es:"Descansas un rato.", ru:"Ты немного отдыхаешь." },
+          { es:"Él descansa en el sofá.", ru:"Он отдыхает на диване." },
+          { es:"Descansamos los domingos.", ru:"Мы отдыхаем по воскресеньям." },
+          { es:"Descansáis en casa.", ru:"Вы отдыхаете дома." },
+          { es:"Descansan cuando pueden.", ru:"Они отдыхают, когда могут." }
+        ]
+      }
+    }
+  }
+}
 };

@@ -462,20 +462,18 @@ const VERBS = {
               examplesReflex: []
             },
             futuro: {
-              forms: ["querré","querrás","querrá","querremos","querréis","querrán"],
-              reflexForms: ["","","","","",""],
-              examples: [
-                { es:"Querré descansar mañana.", ru:"Я захочу отдохнуть завтра." },
-                { es:"Querrás saber la verdad.", ru:"Ты захочешь узнать правду." },
-                { es:"Él querrá acompañarte.", ru:"Он захочет пойти с тобой." },
-                { es:"Querremos visitar París.", ru:"Мы захотим посетить Париж." },
-                { es:"Querréis volver aquí.", ru:"{ es:"Querrán quedarse más tiempo.", ru:"Они захотят остаться подольше." }
-              ],
-              examplesReflex: []
-                          ]
-            }
-          }
-        }
+  forms: ["querré","querrás","querrá","querremos","querréis","querrán"],
+  reflexForms: ["","","","","",""],
+  examples: [
+    { es:"Querré descansar mañana.", ru:"Я захочу отдохнуть завтра." },
+    { es:"Querrás saber la verdad.", ru:"Ты захочешь узнать правду." },
+    { es:"Él querrá acompañarte.", ru:"Он захочет пойти с тобой." },
+    { es:"Querremos visitar París.", ru:"Мы захотим посетить Париж." },
+    { es:"Querréis volver aquí.", ru:"Вы захотите вернуться сюда." },
+    { es:"Querrán quedarse más tiempo.", ru:"Они захотят остаться подольше." }
+  ],
+  examplesReflex: []
+}
       }
     }
   }

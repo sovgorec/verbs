@@ -6,7 +6,7 @@
 }
 
 body.dark {
-  --bg: #10131a;
+  --bg: #0f1117;
   --text: #e6e8ef;
   --card-bg: #1b1f2b;
 }
@@ -33,8 +33,15 @@ header {
 }
 
 .flag {
-  font-size: 26px;
+  font-size: 28px;
   margin: 0;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
 }
 
 .switch {
@@ -46,25 +53,24 @@ header {
 .switch input { display: none; }
 .slider {
   position: absolute;
-  cursor: pointer;
   inset: 0;
-  background-color: #ccc;
+  background: #ccc;
   border-radius: 34px;
   transition: 0.3s;
 }
 .slider:before {
-  position: absolute;
   content: "";
+  position: absolute;
   height: 18px;
   width: 18px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background: white;
   border-radius: 50%;
   transition: 0.3s;
 }
 input:checked + .slider {
-  background-color: var(--blue);
+  background: var(--blue);
 }
 input:checked + .slider:before {
   transform: translateX(20px);
@@ -79,29 +85,24 @@ select {
   background: var(--card-bg);
   color: var(--text);
   font-size: 15px;
-  transition: 0.2s;
 }
-select:focus {
-  border-color: var(--blue);
-  outline: none;
-}
+select:focus { border-color: var(--blue); outline: none; }
 
 .tabs {
   display: flex;
   margin-top: 14px;
+  gap: 5px;
 }
 .tab {
   flex: 1;
   padding: 10px;
-  border: none;
-  border-radius: 8px;
+  border: 1px solid #d0d3db;
   background: var(--card-bg);
   color: var(--text);
-  margin-right: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  border: 1px solid #d0d3db;
-  transition: 0.2s;
   font-weight: 500;
+  transition: 0.2s;
 }
 .tab.active {
   background: var(--blue);
@@ -121,6 +122,12 @@ select:focus {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.verb-block:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .verb-block b {
   display: block;
@@ -129,16 +136,13 @@ select:focus {
 }
 
 .examples {
-  margin-top: 20px;
-}
-#examplesDropdown {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
+  margin-top: 16px;
   background: var(--card-bg);
-  border: 1px solid #d0d3db;
-  color: var(--text);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   font-size: 15px;
+  line-height: 1.6;
 }
 
 .bottom-nav {
@@ -150,7 +154,7 @@ select:focus {
   border-top: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 12px 10px;
   box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
 }
 .bottom-nav button {
@@ -165,6 +169,4 @@ select:focus {
   cursor: pointer;
   transition: 0.2s;
 }
-.bottom-nav button:hover {
-  opacity: 0.9;
-}
+.bottom-nav button:hover { opacity: 0.9; }

@@ -43,5 +43,48 @@
 
   <script src="verbsData.js"></script>
   <script src="app.js"></script>
+
+  <script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwwJzeNyVS0m6WUrWE-xQKxYYByLV3qcVLSiQlt011vkXrqqyAfoVL6U-0JhyWV-aHW/exec';
+
+// загружаем данные
+async function loadVerbs(category = 'Популярные') {
+  try {
+    const res = await fetch(`${API_URL}?category=${encodeURIComponent(category)}`);
+    const data = await res.json();
+    console.log('✅ Получено:', data);
+
+    // Здесь можно вызвать твою функцию отрисовки:
+    renderVerbs(data);
+  } catch (err) {
+    console.error('Ошибка при загрузке данных:', err);
+  }
+}
+
+// пример функции для отрисовки
+function renderVerbs(data) {
+  const container = document.getElementById('verbs-container');
+  container.innerHTML = '';
+
+  // создаём блоки по глаголам
+  const grouped = {};
+  data.forEach(row => {
+    if (!grouped[row.verb]) grouped[row.verb] = [];
+    grouped[row.verb].push(row);
+  });
+
+  for (const [verb, forms] of Object.entries(grouped)) {
+    const block = document.createElement('div');
+    block.className = 'verb-block';
+    block.innerHTML = `<h3>${verb}</h3>` +
+      forms.map(f => `<p><b>${f.tense} (${f.pronoun}):</b> ${f.form} — ${f.example_es} <i>(${f.example_ru})</i></p>`).join('');
+    container.appendChild(block);
+  }
+}
+
+// при загрузке страницы подгружаем популярные глаголы
+window.addEventListener('DOMContentLoaded', () => loadVerbs());
+</script>
+<div id="verbs-container"></div>
 </body>
 </html>

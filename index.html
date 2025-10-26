@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VerboPlay</title>
+  <title>🇪🇸</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -12,6 +12,7 @@
     <header>
       <h1 class="flag">🇪🇸</h1>
       <div class="toggle">
+        <span>Тёмная тема</span>
         <label class="switch">
           <input type="checkbox" id="themeToggle">
           <span class="slider"></span>
@@ -20,27 +21,19 @@
     </header>
 
     <div class="selects">
-      <select id="categorySelect">
-        <option value="">Выбери категорию</option>
-      </select>
-      <select id="verbSelect">
-        <option value="">Выбери глагол</option>
-      </select>
+      <select id="categorySelect"></select>
+      <select id="verbSelect"></select>
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-tense="presente">Настоящее</button>
       <button class="tab" data-tense="pasado">Прошедшее</button>
+      <button class="tab active" data-tense="presente">Настоящее</button>
       <button class="tab" data-tense="futuro">Будущее</button>
     </div>
 
     <div id="verbCard" class="verb-card"></div>
 
-    <div class="examples">
-      <select id="examplesDropdown">
-        <option>Примеры...</option>
-      </select>
-    </div>
+    <div class="examples" id="examplesBlock"></div>
   </div>
 
   <div class="bottom-nav">

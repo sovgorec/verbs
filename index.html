@@ -1,275 +1,47 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Борис Бирюков</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#f6f8fb">
-
-<style>
-:root {
-  --bg:#f6f8fb;--card:#fff;--text:#0b1220;--muted:#667085;
-  --accent:#1a936f;--accent-hover:#157d5e;--border:#e3e8ef;
-}
-* { box-sizing:border-box; }
-html, body {
-  height:100%;
-  margin:0;
-  background:var(--bg);
-  font-family:Inter,sans-serif;
-  color:var(--text);
-  -webkit-user-select:none;
-  -webkit-touch-callout:none;
-  overflow:hidden;
-}
-.wrap {
-  width:100%;
-  max-width:700px;
-  padding:14px 16px 100px;
-  margin:0 auto;
-}
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-h1 { font-size:18px; font-weight:800; margin:0; }
-.count { font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px; }
-.switch {
-  position:relative;
-  width:42px; height:24px;
-  background:var(--border);
-  border-radius:20px;
-  cursor:pointer;
-  transition:background .2s;
-}
-.switch::after {
-  content:"";
-  position:absolute;
-  top:3px; left:3px;
-  width:18px; height:18px;
-  background:#fff;
-  border-radius:50%;
-  transition:transform .2s;
-}
-.switch.on { background:var(--accent); }
-.switch.on::after { transform:translateX(18px); }
-
-select {
-  width:100%;
-  padding:10px 12px;
-  font-size:14px;
-  font-weight:500;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:#fff;
-  margin-bottom:10px;
-}
-
-.tense-tabs {
-  display:flex;
-  gap:6px;
-  margin-bottom:10px;
-}
-.tense-tab {
-  flex:1;
-  text-align:center;
-  padding:10px 0;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:#fff;
-  font-size:14px;
-  font-weight:600;
-  cursor:pointer;
-}
-.tense-tab.active {
-  background:var(--accent);
-  color:#fff;
-  border-color:var(--accent);
-}
-
-.card {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:0 3px 10px rgba(16,24,40,.05);
-  margin-bottom:12px;
-}
-.card-hd { padding:12px 14px; border-bottom:1px solid var(--border); }
-.verb-line { font-size:18px; font-weight:700; }
-.verb-line span { color:var(--muted); font-size:14px; margin-left:6px; }
-
-.table2col {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  border-top:1px solid var(--border);
-}
-.row {
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  padding:10px 12px;
-  border-bottom:1px solid var(--border);
-}
-.row span.forma { font-size:18px; font-weight:700; }
-
-.examples {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px 14px;
-  box-shadow:0 3px 10px rgba(16,24,40,.05);
-  margin-bottom:12px;
-}
-.ex-item { margin-bottom:10px; }
-.ex-item:last-child { margin-bottom:0; }
-.es { font-size:17px; font-weight:600; }
-.ru { font-size:14px; color:var(--muted); }
-
-.message {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px;
-  text-align:center;
-  color:var(--muted);
-  font-size:15px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.03);
-  margin-bottom:12px;
-}
-
-.footer {
-  position:fixed;
-  bottom:calc(env(safe-area-inset-bottom) + 20px);
-  left:0;
-  width:100%;
-  display:flex;
-  gap:8px;
-  justify-content:space-between;
-  background:#fff;
-  border-top:1px solid var(--border);
-  padding:10px 16px;
-  box-shadow:0 -2px 10px rgba(0,0,0,0.05);
-}
-button.nav {
-  flex:1;
-  padding:12px 0;
-  font-size:15px;
-  font-weight:700;
-  border:none;
-  border-radius:12px;
-  color:#fff;
-  background:var(--accent);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  transition:transform .1s ease;
-}
-button.nav:active {
-  transform:scale(0.96);
-  background:var(--accent-hover);
-}
-button.nav svg { width:15px; height:15px; fill:#fff; }
-</style>
-</head>
-
 <body>
-<div class="wrap">
-  <header>
-    <h1>🇪🇸 Борис Бирюков</h1>
-    <div class="count">Возвратный <div id="reflexSwitch" class="switch"></div></div>
-  </header>
+  <div class="container">
+    <header>
+      <span class="flag">🇪🇸</span>
+      <h1 class="app-title">Борис Бирюков</h1>
+      <div class="toggle">
+        <label for="themeToggle">Тёмная тема</label>
+        <input type="checkbox" id="themeToggle">
+      </div>
+    </header>
 
-  <select id="categorySelect"></select>
-  <select id="verbSelect"></select>
-
-  <div class="tense-tabs">
-    <div id="tabPast" class="tense-tab">Прошедшее</div>
-    <div id="tabPresent" class="tense-tab active">Настоящее</div>
-    <div id="tabFuture" class="tense-tab">Будущее</div>
-  </div>
-
-  <section id="panel" class="card" hidden>
-    <div class="card-hd"><div class="verb-line" id="verbLine">—</div></div>
-    <div id="table2col" class="table2col">
-      <div class="col" id="col-left"></div>
-      <div class="col" id="col-right"></div>
+    <div class="selects">
+      <select id="categorySelect"></select>
+      <select id="verbSelect"></select>
     </div>
-  </section>
 
-  <section id="examples" class="examples" hidden></section>
-  <div id="message" class="message" hidden></div>
-</div>
+    <div class="tabs">
+      <button class="tab active" id="tabPast">Прошедшее</button>
+      <button class="tab" id="tabPresent">Настоящее</button>
+      <button class="tab" id="tabFuture">Будущее</button>
+    </div>
 
-<div class="footer">
-  <button id="prevVerb" class="nav">
-    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Назад
-  </button>
-  <button id="nextVerb" class="nav">
-    Далее<svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-  </button>
-</div>
+    <div class="verb-card" id="verbCard">
+      <div class="conjugation">
+        <div class="col">
+          <p><b>yo</b> <span id="yoForm"></span></p>
+          <p><b>tú</b> <span id="tuForm"></span></p>
+          <p><b>él/ella</b> <span id="elForm"></span></p>
+        </div>
+        <div class="col">
+          <p><b>nosotros</b> <span id="nosForm"></span></p>
+          <p><b>vosotros</b> <span id="vosForm"></span></p>
+          <p><b>ellos</b> <span id="ellosForm"></span></p>
+        </div>
+      </div>
+    </div>
 
-<script>
-// === Звук клика + вибрация ===
-const tap = (() => {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  return () => {
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "square";
-    o.frequency.value = 200;
-    g.gain.value = 0.05;
-    o.connect(g);
-    g.connect(ctx.destination);
-    o.start();
-    o.stop(ctx.currentTime + 0.08);
-  };
-})();
+    <div class="examples">
+      <select id="examplesDropdown"></select>
+    </div>
 
-function haptic() {
-  tap();
-  if (navigator.vibrate) navigator.vibrate([10, 20, 10]); // лёгкая двойная вибрация
-}
-
-// === Привязка вибрации ко всем интерактивным элементам ===
-[
-  "prevVerb", "nextVerb",
-  "tabPast", "tabPresent", "tabFuture",
-  "categorySelect", "verbSelect",
-  "reflexSwitch"
-].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener("click", haptic);
-});
-
-// Также при изменении значений в селектах
-["categorySelect", "verbSelect"].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener("change", haptic);
-});
-
-// === Отключаем масштабирование и скролл (эффект мобильного приложения) ===
-document.addEventListener("gesturestart", e => e.preventDefault());
-document.addEventListener("dblclick", e => e.preventDefault());
-document.addEventListener("wheel", e => {
-  if (e.ctrlKey) e.preventDefault();
-}, { passive: false });
-document.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
-
-// === Автоматическое исправление фокуса (чтобы не сдвигался экран на iOS) ===
-window.addEventListener("focusin", e => {
-  if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
-    window.scrollTo(0, 0);
-  }
-});
-</script>
-
-<!-- Подключение JS файлов -->
-<script src="verbsData.js"></script>
-<script src="app.js"></script>
+    <div class="nav-buttons">
+      <button id="prevVerb">◀ Назад</button>
+      <button id="nextVerb">Далее ▶</button>
+    </div>
+  </div>
 </body>
-</html>

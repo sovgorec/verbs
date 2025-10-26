@@ -1,24 +1,26 @@
+// Темная тема
 const toggle = document.getElementById("themeToggle");
 toggle.addEventListener("change", () => {
   document.body.classList.toggle("dark", toggle.checked);
 });
 
-// --- Пример заполнения интерфейса ---
+// Элементы
 const categorySelect = document.getElementById("categorySelect");
 const verbSelect = document.getElementById("verbSelect");
+const verbCard = document.getElementById("verbCard");
 const examplesDropdown = document.getElementById("examplesDropdown");
 const tabs = document.querySelectorAll(".tab");
 
-// Загружаем категории
+let currentVerb = null;
+let currentTense = "presente";
+
+// Категории
 Object.keys(VERBS).forEach(category => {
   const opt = document.createElement("option");
   opt.value = category;
   opt.textContent = category;
   categorySelect.appendChild(opt);
 });
-
-let currentVerb = null;
-let currentTense = "presente";
 
 categorySelect.addEventListener("change", () => {
   verbSelect.innerHTML = "<option>Выбери глагол</option>";
@@ -50,13 +52,15 @@ function renderVerb() {
   const tenseData = currentVerb.tenses[currentTense];
   if (!tenseData) return;
 
-  const [yo, tu, el, nos, vos, ellos] = tenseData.forms;
-  document.getElementById("yoForm").textContent = yo;
-  document.getElementById("tuForm").textContent = tu;
-  document.getElementById("elForm").textContent = el;
-  document.getElementById("nosForm").textContent = nos;
-  document.getElementById("vosForm").textContent = vos;
-  document.getElementById("ellosForm").textContent = ellos;
+  const persons = ["yo","tú","él/ella","nosotros","vosotros","ellos"];
+  verbCard.innerHTML = "";
+
+  persons.forEach((p, i) => {
+    const block = document.createElement("div");
+    block.classList.add("verb-block");
+    block.innerHTML = `<b>${p}</b><span>${tenseData.forms[i]}</span>`;
+    verbCard.appendChild(block);
+  });
 
   examplesDropdown.innerHTML = "<option>Примеры...</option>";
   tenseData.examples.forEach(ex => {

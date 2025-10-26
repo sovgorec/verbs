@@ -1,8 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VerboPlay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
   <div class="container">
     <header>
       <span class="flag">🇪🇸</span>
-      <h1 class="app-title">Борис Бирюков</h1>
+      <h1 class="app-title">VerboPlay</h1>
       <div class="toggle">
         <label for="themeToggle">Тёмная тема</label>
         <input type="checkbox" id="themeToggle">
@@ -10,14 +18,18 @@
     </header>
 
     <div class="selects">
-      <select id="categorySelect"></select>
-      <select id="verbSelect"></select>
+      <select id="categorySelect">
+        <option value="">Выбери категорию</option>
+      </select>
+      <select id="verbSelect">
+        <option value="">Выбери глагол</option>
+      </select>
     </div>
 
     <div class="tabs">
-      <button class="tab active" id="tabPast">Прошедшее</button>
-      <button class="tab" id="tabPresent">Настоящее</button>
-      <button class="tab" id="tabFuture">Будущее</button>
+      <button class="tab active" data-tense="presente">Настоящее</button>
+      <button class="tab" data-tense="pasado">Прошедшее</button>
+      <button class="tab" data-tense="futuro">Будущее</button>
     </div>
 
     <div class="verb-card" id="verbCard">
@@ -36,7 +48,9 @@
     </div>
 
     <div class="examples">
-      <select id="examplesDropdown"></select>
+      <select id="examplesDropdown">
+        <option>Примеры...</option>
+      </select>
     </div>
 
     <div class="nav-buttons">
@@ -44,4 +58,8 @@
       <button id="nextVerb">Далее ▶</button>
     </div>
   </div>
+
+  <script src="verbsData.js"></script>
+  <script src="app.js"></script>
 </body>
+</html>

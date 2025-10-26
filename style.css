@@ -8,15 +8,15 @@ body {
 
 :root {
   --blue: #42a5f5;
-  --bg: #f6f8fb;
+  --bg: #f5f7fb;
   --text: #0b1220;
-  --card-bg: #fff;
+  --card-bg: #ffffff;
 }
 
 body.dark {
-  --bg: #0e1118;
+  --bg: #10131a;
   --text: #e6e8ef;
-  --card-bg: #1a1f29;
+  --card-bg: #1b1f2b;
 }
 
 .container {
@@ -31,9 +31,13 @@ header {
   align-items: center;
 }
 
+.flag {
+  font-size: 22px;
+}
+
 .app-title {
-  margin: 0;
   font-size: 20px;
+  margin: 0;
   font-weight: 600;
 }
 
@@ -42,14 +46,21 @@ header {
   margin-right: 6px;
 }
 
-.selects select {
+select {
   width: 100%;
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #d0d3db;
   background: var(--card-bg);
   color: var(--text);
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+select:focus {
+  border-color: var(--blue);
+  outline: none;
 }
 
 .tabs {
@@ -60,31 +71,35 @@ header {
 .tab {
   flex: 1;
   padding: 10px;
+  border: none;
   background: var(--card-bg);
-  border: 1px solid #ccc;
+  color: var(--text);
   border-radius: 8px;
   margin-right: 4px;
   font-weight: 500;
-  color: var(--text);
-  transition: all 0.2s;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid #d0d3db;
 }
 
 .tab.active {
   background: var(--blue);
   color: white;
+  border-color: var(--blue);
 }
 
 .verb-card {
   margin-top: 16px;
   padding: 16px;
   background: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .conjugation {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .col p {
@@ -97,12 +112,13 @@ header {
 }
 
 #examplesDropdown {
+  background: var(--card-bg);
+  border: 1px solid #d0d3db;
+  color: var(--text);
+  border-radius: 8px;
   width: 100%;
   padding: 10px;
-  border-radius: 8px;
-  background: var(--card-bg);
-  border: 1px solid #ccc;
-  color: var(--text);
+  font-size: 15px;
 }
 
 .nav-buttons {

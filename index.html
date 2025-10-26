@@ -1,90 +1,186 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🇪🇸</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VerboPlay — неправильные глаголы</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f8fb;
+      color: #0b1220;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background-color: #1a1a1a;
+      color: #f4f4f4;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      background-color: #14a2ff;
+      color: white;
+    }
+
+    .switcher {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px auto;
+    }
+
+    .switcher input {
+      width: 20px;
+      height: 20px;
+    }
+
+    #verbs-container {
+      padding: 15px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .verb-block {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: 0.2s ease;
+    }
+
+    body.dark .verb-block {
+      background: #2a2a2a;
+      box-shadow: 0 4px 10px rgba(255,255,255,0.05);
+    }
+
+    .verb-block:hover {
+      transform: translateY(-2px);
+    }
+
+    .verb-block h3 {
+      margin-top: 0;
+      color: #14a2ff;
+    }
+
+    body.dark .verb-block h3 {
+      color: #4ea7ff;
+    }
+
+    .tense {
+      font-weight: bold;
+      margin-top: 10px;
+      color: #1a936f;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #14a2ff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    footer button {
+      background: white;
+      color: #14a2ff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin: 0 8px;
+      font-size: 15px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      transition: 0.2s;
+    }
+
+    footer button:hover {
+      background: #e3f4ff;
+    }
+
+    body.dark footer {
+      background: #005b99;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1 class="flag">🇪🇸</h1>
-      <div class="toggle">
-        <span>Тёмная тема</span>
-        <label class="switch">
-          <input type="checkbox" id="themeToggle">
-          <span class="slider"></span>
-        </label>
-      </div>
-    </header>
+  <header>🇪🇸 VerboPlay — неправильные глаголы</header>
 
-    <div class="selects">
-      <select id="categorySelect"></select>
-      <select id="verbSelect"></select>
-    </div>
-
-    <div class="tabs">
-      <button class="tab" data-tense="pasado">Прошедшее</button>
-      <button class="tab active" data-tense="presente">Настоящее</button>
-      <button class="tab" data-tense="futuro">Будущее</button>
-    </div>
-
-    <div id="verbCard" class="verb-card"></div>
-
-    <div class="examples" id="examplesBlock"></div>
+  <div class="switcher">
+    <label for="darkMode">🌙 Тёмная тема</label>
+    <input type="checkbox" id="darkMode">
   </div>
 
-  <div class="bottom-nav">
-    <button id="prevVerb">◀ Назад</button>
-    <button id="nextVerb">Далее ▶</button>
+  <div id="verbs-container">
+    <p style="text-align:center;">Загрузка данных...</p>
   </div>
 
-  <script src="verbsData.js"></script>
-  <script src="app.js"></script>
+  <footer>
+    <button onclick="loadVerbs('Популярные')">Популярные</button>
+    <button onclick="loadVerbs('В доме')">В доме</button>
+    <button onclick="loadVerbs('В спорте')">В спорте</button>
+  </footer>
 
   <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbwwJzeNyVS0m6WUrWE-xQKxYYByLV3qcVLSiQlt011vkXrqqyAfoVL6U-0JhyWV-aHW/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwwJzeNyVS0m6WUrWE-xQKxYYByLV3qcVLSiQlt011vkXrqqyAfoVL6U-0JhyWV-aHW/exec';
+    const container = document.getElementById('verbs-container');
 
-// загружаем данные
-async function loadVerbs(category = 'Популярные') {
-  try {
-    const res = await fetch(`${API_URL}?category=${encodeURIComponent(category)}`);
-    const data = await res.json();
-    console.log('✅ Получено:', data);
+    async function loadVerbs(category = 'Популярные') {
+      container.innerHTML = '<p style="text-align:center;">⏳ Загрузка...</p>';
+      try {
+        const res = await fetch(`${API_URL}?category=${encodeURIComponent(category)}`);
+        const data = await res.json();
+        renderVerbs(data);
+      } catch (err) {
+        container.innerHTML = '<p style="color:red;text-align:center;">Ошибка загрузки данных 😢</p>';
+        console.error(err);
+      }
+    }
 
-    // Здесь можно вызвать твою функцию отрисовки:
-    renderVerbs(data);
-  } catch (err) {
-    console.error('Ошибка при загрузке данных:', err);
-  }
-}
+    function renderVerbs(data) {
+      container.innerHTML = '';
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p style="text-align:center;">Нет данных для этой категории.</p>';
+        return;
+      }
 
-// пример функции для отрисовки
-function renderVerbs(data) {
-  const container = document.getElementById('verbs-container');
-  container.innerHTML = '';
+      const grouped = {};
+      data.forEach(r => {
+        if (!grouped[r.verb]) grouped[r.verb] = [];
+        grouped[r.verb].push(r);
+      });
 
-  // создаём блоки по глаголам
-  const grouped = {};
-  data.forEach(row => {
-    if (!grouped[row.verb]) grouped[row.verb] = [];
-    grouped[row.verb].push(row);
-  });
+      for (const [verb, items] of Object.entries(grouped)) {
+        const block = document.createElement('div');
+        block.className = 'verb-block';
+        const ru = items[0]?.ru || '';
+        block.innerHTML = `<h3>${verb} — <i>${ru}</i></h3>` +
+          items.map(i =>
+            `<p><span class='tense'>${i.tense}</span> — ${i.pronoun}: <b>${i.form}</b><br>${i.example_es} <i>(${i.example_ru})</i></p>`
+          ).join('');
+        container.appendChild(block);
+      }
+    }
 
-  for (const [verb, forms] of Object.entries(grouped)) {
-    const block = document.createElement('div');
-    block.className = 'verb-block';
-    block.innerHTML = `<h3>${verb}</h3>` +
-      forms.map(f => `<p><b>${f.tense} (${f.pronoun}):</b> ${f.form} — ${f.example_es} <i>(${f.example_ru})</i></p>`).join('');
-    container.appendChild(block);
-  }
-}
+    // Темная тема
+    const darkToggle = document.getElementById('darkMode');
+    darkToggle.addEventListener('change', e => {
+      document.body.classList.toggle('dark', e.target.checked);
+    });
 
-// при загрузке страницы подгружаем популярные глаголы
-window.addEventListener('DOMContentLoaded', () => loadVerbs());
-</script>
-<div id="verbs-container"></div>
+    // Загружаем по умолчанию
+    window.addEventListener('DOMContentLoaded', () => loadVerbs());
+  </script>
 </body>
 </html>
